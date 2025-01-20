@@ -6,6 +6,8 @@
       <list>
         <option value="$PROJECT_DIR$/product-service/pom.xml" />
         <option value="$PROJECT_DIR$/../spring-lib/pom.xml" />
+        <option value="$PROJECT_DIR$/core-service/pom.xml" />
+        <option value="$PROJECT_DIR$/core-service/src/main/java/com/vinhnt/api/core/infrastructure/application-service/pom.xml" />
       </list>
     </option>
   </component>

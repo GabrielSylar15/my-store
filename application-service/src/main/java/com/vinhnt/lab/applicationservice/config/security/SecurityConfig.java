@@ -1,4 +1,4 @@
-package com.vinhnt.api.core.infrastructure.config.security;
+package com.vinhnt.lab.applicationservice.config.security;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;

@@ -1,4 +1,4 @@
-package com.vinhnt.api.core.infrastructure.config.database;
+package com.vinhnt.lab.applicationservice.config.database;
 
 import com.vinhnt.api.core.domain.Product;
 import com.vinhnt.common.config.database.DataSourceConfig;
