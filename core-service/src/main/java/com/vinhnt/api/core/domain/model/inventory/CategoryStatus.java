@@ -1,4 +1,6 @@
 package com.vinhnt.api.core.domain.model.inventory;
 
-public class ProductAttributeValue {
+public enum CategoryStatus {
+    ACTIVE,
+    INACTIVE,
 }
