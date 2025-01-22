@@ -1,6 +1,6 @@
-package com.vinhnt.lab.applicationservice.config.database;
+package com.vinhnt.applicationservice.config.database;
 
-import com.vinhnt.api.core.domain.Product;
+import com.vinhnt.applicationservice.adapter.outbound.product.JPAProduct;
 import com.vinhnt.common.config.database.DataSourceConfig;
 import com.vinhnt.common.config.property.DataSourceProperties;
 import org.springframework.beans.factory.annotation.Value;
@@ -15,7 +15,7 @@ import javax.sql.DataSource;
 import java.util.List;
 
 @EnableJpaRepositories(
-        basePackages = "com.vinhnt.api.core.infrastructure.repository",
+        basePackages = "com.vinhnt.applicationservice.adapter.outbound.product",
         entityManagerFactoryRef = DatabaseProductConfig.ENTITY_MANAGER,
         transactionManagerRef = DatabaseProductConfig.TRANS_MANAGER
 )
@@ -35,7 +35,7 @@ public class DatabaseProductConfig {
 
     @Bean(ENTITY_MANAGER)
     public LocalContainerEntityManagerFactoryBean getEntityManager() {
-        String packageName = Product.class.getPackageName();
+        String packageName = JPAProduct.class.getPackageName();
         return DataSourceConfig.buildLocalContainerEntityManagerFactoryBean(getDataSource(), List.of(packageName), ENTITY_MANAGER);
     }
 

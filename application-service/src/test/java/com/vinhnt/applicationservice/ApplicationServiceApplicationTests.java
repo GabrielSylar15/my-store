@@ -1,4 +1,4 @@
-package com.vinhnt.lab.applicationservice;
+package com.vinhnt.applicationservice;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

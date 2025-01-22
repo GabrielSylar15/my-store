@@ -1,9 +1,8 @@
 package com.vinhnt.api.core.domain.model.inventory;
 
-public class Product {
-    private Long id;
+public class Category {
     private String name;
     private String description;
-    private Category category;
-
+    private Long parentId;
+    private Integer status;
 }
