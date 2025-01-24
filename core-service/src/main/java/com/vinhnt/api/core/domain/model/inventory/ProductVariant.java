@@ -6,6 +6,7 @@ import java.util.List;
 
 public class ProductVariant implements Entity<ProductVariantId> {
     private ProductVariantId Id;
+    private ProductId productId;
     private ProductPriceInfo priceInfo;
     private List<ProductAttribute> attributes;
     private ProductVariantStatus status;

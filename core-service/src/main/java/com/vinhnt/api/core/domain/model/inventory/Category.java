@@ -21,7 +21,6 @@ public class Category implements Entity<CategoryId> {
     public void validate(CategoryRepository categoryRepository, ValidationNotificationHandler validationNotificationHandler) {
         CategoryValidator categoryValidator = new CategoryValidator(validationNotificationHandler, this, categoryRepository);
         categoryValidator.validate();
-
     }
 
     CategoryId getId() {

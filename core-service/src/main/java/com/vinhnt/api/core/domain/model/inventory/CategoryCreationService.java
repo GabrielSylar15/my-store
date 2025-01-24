@@ -1,6 +1,5 @@
 package com.vinhnt.api.core.domain.model.inventory;
 
-import com.vinhnt.api.core.application.port.inbound.product.CategoryDTO;
 import com.vinhnt.api.core.application.port.oubound.product.CategoryRepository;
 import com.vinhnt.api.core.domain.model.inventory.exception.InvalidCategoryException;
 
@@ -11,8 +10,8 @@ public class CategoryCreationService {
         this.categoryRepository = categoryRepository;
     }
 
-    public Category initCategory(CategoryDTO categoryDTO) {
-        Category category = new Category(categoryDTO.name(), categoryDTO.description(), categoryDTO.parentId(), CategoryStatus.ACTIVE);
+    public Category initCategory(String name, String description, CategoryId parentId) throws InvalidCategoryException {
+        Category category = new Category(name, description, parentId, CategoryStatus.ACTIVE);
         CategoryValidationNotificationHandler notificationHandler = new CategoryValidationNotificationHandler();
         category.validate(categoryRepository, notificationHandler);
         if (notificationHandler.messages().isEmpty()) {

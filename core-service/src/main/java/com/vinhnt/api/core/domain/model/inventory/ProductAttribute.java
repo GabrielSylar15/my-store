@@ -6,5 +6,5 @@ import java.util.List;
 
 public class ProductAttribute implements ValueObject {
     private String name;
-    private List<String> optionList;
+    private List<ProductOption> optionList;
 }

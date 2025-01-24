@@ -8,6 +8,10 @@ public class Product implements AggregateRoot<ProductId> {
     private ProductId id;
     private String name;
     private String description;
-    private Category category;
+    private CategoryId categoryId;
     private List<ProductVariant> productVariants;
+    private PreOrder preOrder;
+    private List<Image> images;
+    private Video video;
+    private ProductDimension productDimension;
 }
