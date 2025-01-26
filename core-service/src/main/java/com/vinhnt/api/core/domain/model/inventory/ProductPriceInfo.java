@@ -6,5 +6,4 @@ public class ProductPriceInfo implements ValueObject {
     private String currency;
     private Long currentPrice;
     private Long originalPrice;
-    private Long wholesalePrice;
 }

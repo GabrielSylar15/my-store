@@ -1,7 +1,7 @@
 package com.vinhnt.api.core.application.usecase.product;
 
 import com.vinhnt.api.core.application.port.inbound.product.ProductCreation;
-import com.vinhnt.api.core.application.port.inbound.product.ProductDTO;
+import com.vinhnt.api.core.application.port.inbound.product.ProductCreationDTO;
 import com.vinhnt.api.core.application.port.oubound.product.ProductRepository;
 import com.vinhnt.api.core.domain.model.inventory.Product;
 import com.vinhnt.api.core.domain.model.inventory.ProductCreationService;
@@ -16,7 +16,7 @@ public class ProductCreationImpl implements ProductCreation {
     }
 
     @Override
-    public Product createProduct(ProductDTO productDTO) {
-        return null;
+    public Product createProduct(ProductCreationDTO productCreationDTO) {
+        Product product = productCreationService.initProduct();
     }
 }

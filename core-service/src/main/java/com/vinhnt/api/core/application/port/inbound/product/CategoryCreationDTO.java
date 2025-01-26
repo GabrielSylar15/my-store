@@ -2,7 +2,7 @@ package com.vinhnt.api.core.application.port.inbound.product;
 
 import com.vinhnt.api.core.domain.model.inventory.CategoryId;
 
-public record CategoryDTO(String name, String description, CategoryId parentId) {
+public record CategoryCreationDTO(String name, String description, CategoryId parentId) {
     @Override
     public String name() {
         return name;

@@ -7,8 +7,8 @@ import com.vinhnt.api.core.domain.model.Validator;
 import java.util.Objects;
 
 public class CategoryValidator extends Validator {
-    private final Category category;
-    private final CategoryRepository categoryRepository;
+    private Category category;
+    private CategoryRepository categoryRepository;
 
     public CategoryValidator(ValidationNotificationHandler validationNotificationHandler, Category category, CategoryRepository categoryRepository) {
         super(validationNotificationHandler);
@@ -18,6 +18,12 @@ public class CategoryValidator extends Validator {
 
     @Override
     public void validate() {
+        if (Objects.nonNull(category.getId())) {
+            Category existedCategory = categoryRepository.findById(category.getId());
+            if (Objects.isNull(existedCategory)) {
+                validationNotificationHandler.handleError("Category with id " + category.getId() + " does not exist");
+            }
+        }
         if (Objects.nonNull(category.getParentId())) {
             Category parentCategory = categoryRepository.findById(category.getParentId());
             if (Objects.isNull(parentCategory)) {
