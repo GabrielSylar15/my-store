@@ -12,4 +12,8 @@ public class ProductVariant implements AggregateRoot<ProductVariantId> {
     private List<ProductAttribute> attributes;
     private ProductVariantStatus status;
     private int stockQuantity;
+    private String sku;
+    private long sold;
+
+    ProductVariant() {}
 }

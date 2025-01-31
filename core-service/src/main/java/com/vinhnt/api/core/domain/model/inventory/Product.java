@@ -5,8 +5,11 @@ import com.vinhnt.api.core.application.port.oubound.product.ProductRepository;
 import com.vinhnt.api.core.domain.model.AggregateRoot;
 import com.vinhnt.api.core.domain.model.ValidationNotificationHandler;
 import com.vinhnt.api.core.domain.model.Validator;
+import com.vinhnt.api.core.domain.model.inventory.exception.InvalidProductException;
+import org.springframework.util.CollectionUtils;
 
 import java.util.List;
+import java.util.Objects;
 
 public class Product implements AggregateRoot<ProductId> {
     private ProductId id;
@@ -19,69 +22,90 @@ public class Product implements AggregateRoot<ProductId> {
     private ProductDimension productDimension;
     private int stockQuantity;
     private Wholesale wholesale;
+    private long totalSold;
 
     public void validate(ProductRepository productRepository,
-                         CategoryRepository CategoryRepository,
+                         CategoryRepository categoryRepository,
                          ValidationNotificationHandler validationNotificationHandler) {
-        Validator productValidator = new ProductValidator(validationNotificationHandler, this, categoryRepository);
+        Validator productValidator = new ProductValidator(validationNotificationHandler, categoryRepository, productRepository, this);
         productValidator.validate();
     }
 
-    Product(CategoryId categoryId,
+    Product(ProductId id,
+            CategoryId categoryId,
             String description,
-            ProductId id,
             List<Image> images,
             String name,
             PreOrder preOrder,
             ProductDimension productDimension,
             int stockQuantity,
             Video video,
-            Wholesale wholesale) {
-        this.categoryId = categoryId;
-        this.description = description;
+            Wholesale wholesale) throws InvalidProductException {
         this.id = id;
-        this.images = images;
-        this.name = name;
+        this.categoryId = categoryId;
+        if (isValidStringLength(description, 1000)) {
+            this.description = description;
+        } else {
+            throw new InvalidProductException("Category description must be non-null, trimmed, and up to 1000 characters");
+        }
+        if (CollectionUtils.isEmpty(images) || isValidNumber(images.size(), 0, 9)) {
+            throw new InvalidProductException("Product images must contain at most 9 images");
+        } else {
+            this.images = images;
+        }
+        if (isValidStringLength(name, 120)) {
+            this.name = name;
+        } else {
+            throw new InvalidProductException("Product name must contain at most 120 characters");
+        }
+        if (isValidNumber(stockQuantity, 0, Integer.MAX_VALUE)) {
+            this.stockQuantity = stockQuantity;
+        } else {
+            throw new InvalidProductException("Product stock quantity is invalid");
+        }
         this.preOrder = preOrder;
         this.productDimension = productDimension;
-        this.stockQuantity = stockQuantity;
         this.video = video;
         this.wholesale = wholesale;
     }
 
-    public CategoryId getCategoryId() {
+    CategoryId getCategoryId() {
         return categoryId;
     }
 
-    public String getDescription() {
+    String getDescription() {
         return description;
     }
 
-    public ProductId getId() {
+    ProductId getId() {
         return id;
     }
 
-    public List<Image> getImages() {
+    List<Image> getImages() {
         return images;
     }
 
-    public String getName() {
+    String getName() {
         return name;
     }
 
-    public PreOrder getPreOrder() {
+    PreOrder getPreOrder() {
         return preOrder;
     }
 
-    public ProductDimension getProductDimension() {
+    ProductDimension getProductDimension() {
         return productDimension;
     }
 
-    public List<ProductVariant> getProductVariants() {
-        return productVariants;
+    Video getVideo() {
+        return video;
     }
 
-    public Video getVideo() {
-        return video;
+    private boolean isValidStringLength(String string, int length) {
+        return !Objects.isNull(string) && !string.isBlank() && string.length() <= length;
+    }
+
+    private boolean isValidNumber(int value, int min, int max) {
+        return value >= min && value <= max;
     }
 }

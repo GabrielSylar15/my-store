@@ -5,7 +5,7 @@ import com.vinhnt.api.core.domain.model.ValidationNotificationHandler;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CategoryValidationNotificationHandler implements ValidationNotificationHandler {
+public class ValidationNotificationHandlerImpl implements ValidationNotificationHandler {
     List<String> messages = new ArrayList<>();
 
     @Override

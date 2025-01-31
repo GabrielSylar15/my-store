@@ -12,7 +12,7 @@ public class CategoryCreationService {
 
     public Category initCategory(String name, String description, CategoryId parentId) throws InvalidCategoryException {
         Category category = new Category(null, name, description, parentId, CategoryStatus.ACTIVE);
-        CategoryValidationNotificationHandler notificationHandler = new CategoryValidationNotificationHandler();
+        ValidationNotificationHandlerImpl notificationHandler = new ValidationNotificationHandlerImpl();
         category.validate(categoryRepository, notificationHandler);
         if (notificationHandler.messages().isEmpty()) {
             return category;
