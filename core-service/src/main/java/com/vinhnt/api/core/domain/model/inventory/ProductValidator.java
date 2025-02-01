@@ -4,7 +4,6 @@ import com.vinhnt.api.core.application.port.oubound.product.CategoryRepository;
 import com.vinhnt.api.core.application.port.oubound.product.ProductRepository;
 import com.vinhnt.api.core.domain.model.ValidationNotificationHandler;
 import com.vinhnt.api.core.domain.model.Validator;
-import com.vinhnt.api.core.domain.model.inventory.exception.InvalidProductException;
 
 import java.util.Objects;
 
@@ -22,16 +21,14 @@ public class ProductValidator extends Validator {
 
     @Override
     public void validate() {
+        Category category = categoryRepository.findById(product.getCategoryId());
+        if (Objects.isNull(category)) {
+            validationNotificationHandler.handleError("Category does not exist");
+        }
         if (Objects.nonNull(product.getId())) {
             Product existedProduct = productRepository.findById(product.getId());
-            Category category = categoryRepository.findById(product.getCategoryId());
-            if (Objects.isNull(category)) {
-                validationNotificationHandler.handleError("Category does not exist");
-            }
             if (Objects.isNull(existedProduct)) {
                 validationNotificationHandler.handleError("Product with id " + product.getId() + " does not exist");
-            } else {
-
             }
         }
 

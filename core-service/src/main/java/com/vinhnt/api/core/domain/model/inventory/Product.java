@@ -23,6 +23,7 @@ public class Product implements AggregateRoot<ProductId> {
     private int stockQuantity;
     private Wholesale wholesale;
     private long totalSold;
+    private List<TierVariation> tierVariations;
 
     public void validate(ProductRepository productRepository,
                          CategoryRepository categoryRepository,

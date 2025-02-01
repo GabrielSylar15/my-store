@@ -4,7 +4,8 @@ import com.vinhnt.api.core.domain.model.ValueObject;
 
 import java.util.List;
 
-public class ProductAttribute implements ValueObject {
+public class TierVariation implements ValueObject {
     private String name;
-    private List<ProductOption> optionList;
+    private List<String> options;
+    private List<Image> images;
 }

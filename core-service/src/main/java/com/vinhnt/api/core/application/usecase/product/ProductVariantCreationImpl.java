@@ -4,9 +4,11 @@ import com.vinhnt.api.core.application.port.inbound.product.ProductVariantCreati
 import com.vinhnt.api.core.application.port.inbound.product.ProductVariantCreationDTO;
 import com.vinhnt.api.core.domain.model.inventory.ProductVariant;
 
+import java.util.List;
+
 public class ProductVariantCreationImpl implements ProductVariantCreation {
     @Override
-    public ProductVariant createProductVariant(ProductVariantCreationDTO productVariantCreationDTO) {
+    public List<ProductVariant> createProductVariant(ProductVariantCreationDTO productVariantCreationDTO) {
         return null;
     }
 }
