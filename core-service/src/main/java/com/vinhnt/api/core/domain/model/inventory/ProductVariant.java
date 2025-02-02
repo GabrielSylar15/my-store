@@ -1,6 +1,8 @@
 package com.vinhnt.api.core.domain.model.inventory;
 
+import com.vinhnt.api.core.application.port.oubound.product.ProductRepository;
 import com.vinhnt.api.core.domain.model.AggregateRoot;
+import com.vinhnt.api.core.domain.model.ValidationNotificationHandler;
 
 
 public class ProductVariant implements AggregateRoot<ProductVariantId> {
@@ -23,4 +25,9 @@ public class ProductVariant implements AggregateRoot<ProductVariantId> {
         this.stockQuantity = stockQuantity;
         this.tierIndex = tierIndex;
     }
+
+    public void validate(ProductRepository productRepository, ValidationNotificationHandler validationNotificationHandler) {
+
+    }
+
 }
