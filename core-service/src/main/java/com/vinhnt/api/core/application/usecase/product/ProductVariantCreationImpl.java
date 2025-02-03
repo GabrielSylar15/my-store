@@ -32,15 +32,10 @@ public class ProductVariantCreationImpl implements ProductVariantCreation {
 
     @Override
     public ProductVariantCreationOutputDTO createProductVariant(ProductVariantCreationDTO productVariantCreationDTO) throws InvalidProductVariantException, InvalidProductException {
-        Product product = productRepository.findById(productVariantCreationDTO.productId());
-        if (Objects.isNull(product)) {
-            throw new InvalidProductVariantException("Product not found");
-        }
-        product = productUpdateService.initProductUpdateTierVariation(product, productVariantCreationDTO.tierVariation());
-        productRepository.save(product);
         List<ProductVariant> productVariants = new ArrayList<>();
         for (ProductVariantDTO variant : productVariantCreationDTO.variants()) {
-            productVariants.add(productVariantCreationService.initProductVariant(productVariantCreationDTO.productId(),
+            productVariants.add(productVariantCreationService.initProductVariant(productVariantCreationDTO.tierVariation(),
+                    productVariantCreationDTO.productId(),
                     variant.priceInfo(),
                     variant.status(),
                     variant.stockQuantity(),
@@ -49,6 +44,12 @@ public class ProductVariantCreationImpl implements ProductVariantCreation {
                     variant.tierIndex()));
         }
         productVariantRepository.saveAll(productVariants);
+        Product product = productRepository.findById(productVariantCreationDTO.productId());
+        if (Objects.isNull(product)) {
+            throw new InvalidProductVariantException("Product not found");
+        }
+        product = productUpdateService.initProductUpdateTierVariation(product, productVariantCreationDTO.tierVariation());
+        productRepository.save(product);
         return new ProductVariantCreationOutputDTO(productVariantCreationDTO.productId(), productVariantCreationDTO.tierVariation(), productVariants);
     }
 }
