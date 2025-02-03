@@ -11,5 +11,5 @@ public interface BaseRepository<T, Id> {
 
     void delete(T data);
 
-    List<T> saveAll(List<T> data);
+    List<T> saveAll(Iterable<T> data);
 }

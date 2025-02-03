@@ -13,14 +13,14 @@ import java.util.Objects;
 
 public class Product implements AggregateRoot<ProductId> {
     private ProductId id;
-    private String name;
-    private String description;
     private CategoryId categoryId;
-    private PreOrder preOrder;
+    private String description;
     private List<Image> images;
-    private Video video;
+    private String name;
+    private PreOrder preOrder;
     private ProductDimension productDimension;
     private int stockQuantity;
+    private Video video;
     private Wholesale wholesale;
     private long totalSold;
     private List<TierVariation> tierVariations;
@@ -41,7 +41,8 @@ public class Product implements AggregateRoot<ProductId> {
             ProductDimension productDimension,
             int stockQuantity,
             Video video,
-            Wholesale wholesale) throws InvalidProductException {
+            Wholesale wholesale,
+            List<TierVariation> tierVariations) throws InvalidProductException {
         this.id = id;
         this.categoryId = categoryId;
         if (isValidStringLength(description, 1000)) {
@@ -68,6 +69,7 @@ public class Product implements AggregateRoot<ProductId> {
         this.productDimension = productDimension;
         this.video = video;
         this.wholesale = wholesale;
+        this.tierVariations = tierVariations;
     }
 
     CategoryId getCategoryId() {
@@ -100,6 +102,22 @@ public class Product implements AggregateRoot<ProductId> {
 
     Video getVideo() {
         return video;
+    }
+
+    int getStockQuantity() {
+        return stockQuantity;
+    }
+
+    Wholesale getWholesale() {
+        return wholesale;
+    }
+
+    long getTotalSold() {
+        return totalSold;
+    }
+
+    List<TierVariation> getTierVariations() {
+        return tierVariations;
     }
 
     private boolean isValidStringLength(String string, int length) {

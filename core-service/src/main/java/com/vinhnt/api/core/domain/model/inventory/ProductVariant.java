@@ -6,7 +6,7 @@ import com.vinhnt.api.core.domain.model.ValidationNotificationHandler;
 
 
 public class ProductVariant implements AggregateRoot<ProductVariantId> {
-    private ProductVariantId Id;
+    private ProductVariantId id;
     private ProductId productId;
     private ProductPriceInfo priceInfo;
     private ProductVariantStatus status;
@@ -16,7 +16,7 @@ public class ProductVariant implements AggregateRoot<ProductVariantId> {
     private int[] tierIndex;
 
     ProductVariant(ProductVariantId id, ProductId productId, ProductPriceInfo priceInfo, ProductVariantStatus status, int stockQuantity, String sku, long sold, int[] tierIndex) {
-        Id = id;
+        this.id = id;
         this.priceInfo = priceInfo;
         this.productId = productId;
         this.sku = sku;

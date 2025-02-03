@@ -10,6 +10,7 @@ import com.vinhnt.api.core.domain.model.inventory.Product;
 import com.vinhnt.api.core.domain.model.inventory.ProductUpdateService;
 import com.vinhnt.api.core.domain.model.inventory.ProductVariant;
 import com.vinhnt.api.core.domain.model.inventory.ProductVariantCreationService;
+import com.vinhnt.api.core.domain.model.inventory.exception.InvalidProductException;
 import com.vinhnt.api.core.domain.model.inventory.exception.InvalidProductVariantException;
 
 import java.util.ArrayList;
@@ -30,18 +31,24 @@ public class ProductVariantCreationImpl implements ProductVariantCreation {
     }
 
     @Override
-    public ProductVariantCreationOutputDTO createProductVariant(ProductVariantCreationDTO productVariantCreationDTO) throws InvalidProductVariantException {
+    public ProductVariantCreationOutputDTO createProductVariant(ProductVariantCreationDTO productVariantCreationDTO) throws InvalidProductVariantException, InvalidProductException {
         Product product = productRepository.findById(productVariantCreationDTO.productId());
         if (Objects.isNull(product)) {
             throw new InvalidProductVariantException("Product not found");
         }
-        product = productUpdateService.initProduct();
+        product = productUpdateService.initProductUpdateTierVariation(product, productVariantCreationDTO.tierVariation());
         productRepository.save(product);
         List<ProductVariant> productVariants = new ArrayList<>();
         for (ProductVariantDTO variant : productVariantCreationDTO.variants()) {
-            productVariants.add(productVariantCreationService.initProductVariant(productVariantCreationDTO.productId(), variant.));
-
-        } productVariantRepository.saveAll(productVariants);
+            productVariants.add(productVariantCreationService.initProductVariant(productVariantCreationDTO.productId(),
+                    variant.priceInfo(),
+                    variant.status(),
+                    variant.stockQuantity(),
+                    variant.sku(),
+                    variant.sold(),
+                    variant.tierIndex()));
+        }
+        productVariantRepository.saveAll(productVariants);
         return new ProductVariantCreationOutputDTO(productVariantCreationDTO.productId(), productVariantCreationDTO.tierVariation(), productVariants);
     }
 }
