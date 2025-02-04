@@ -45,26 +45,23 @@ public class Product implements AggregateRoot<ProductId> {
             List<TierVariation> tierVariations) throws InvalidProductException {
         this.id = id;
         this.categoryId = categoryId;
-        if (isValidStringLength(description, 1000)) {
-            this.description = description;
-        } else {
+        if (!isValidStringLength(description, 1000)) {
             throw new InvalidProductException("Category description must be non-null, trimmed, and up to 1000 characters");
         }
         if (CollectionUtils.isEmpty(images) || isValidNumber(images.size(), 0, 9)) {
             throw new InvalidProductException("Product images must contain at most 9 images");
-        } else {
-            this.images = images;
         }
-        if (isValidStringLength(name, 120)) {
-            this.name = name;
-        } else {
+        if (!isValidStringLength(name, 120)) {
             throw new InvalidProductException("Product name must contain at most 120 characters");
         }
-        if (isValidNumber(stockQuantity, 0, Integer.MAX_VALUE)) {
-            this.stockQuantity = stockQuantity;
-        } else {
+        if (!isValidNumber(stockQuantity, 0, Integer.MAX_VALUE)) {
             throw new InvalidProductException("Product stock quantity is invalid");
         }
+        this.description = description;
+        this.images = images;
+        this.name = name;
+        this.stockQuantity = stockQuantity;
+
         this.preOrder = preOrder;
         this.productDimension = productDimension;
         this.video = video;
