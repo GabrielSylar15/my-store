@@ -4,8 +4,9 @@ import com.vinhnt.api.core.domain.model.inventory.ProductId;
 import com.vinhnt.api.core.domain.model.inventory.TierVariation;
 
 import java.util.List;
+import java.util.Set;
 
 public record ProductVariantCreationDTO(ProductId productId,
                                         List<TierVariation> tierVariation,
-                                        List<ProductVariantDTO> variants) {
+                                        Set<ProductVariantDTO> variants) {
 }

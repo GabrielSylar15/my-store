@@ -6,7 +6,9 @@ import com.vinhnt.api.core.domain.model.ValidationNotificationHandler;
 import com.vinhnt.api.core.domain.model.Validator;
 import com.vinhnt.api.core.domain.model.inventory.exception.InvalidProductVariantException;
 
+import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 
 
 public class ProductVariant implements AggregateRoot<ProductVariantId> {
@@ -86,5 +88,17 @@ public class ProductVariant implements AggregateRoot<ProductVariantId> {
 
     int[] getTierIndex() {
         return tierIndex;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        ProductVariant that = (ProductVariant) o;
+        return Objects.equals(id, that.id) || (Objects.equals(productId, that.productId) && Objects.equals(priceInfo, that.priceInfo) && status == that.status && Objects.equals(sku, that.sku) && Objects.deepEquals(tierIndex, that.tierIndex));
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, productId, Arrays.hashCode(tierIndex));
     }
 }

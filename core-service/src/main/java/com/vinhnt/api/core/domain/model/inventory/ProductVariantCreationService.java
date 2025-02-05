@@ -32,8 +32,4 @@ public class ProductVariantCreationService {
             throw new InvalidProductVariantException(String.format("Invalid product variant. Reasons: %s", notificationHandler.concatenatedMessage()));
         }
     }
-
-    public List<ProductVariant> initProductVariants(ProductVariantRepository productVariantRepository) throws InvalidProductVariantException {
-
-    }
 }
