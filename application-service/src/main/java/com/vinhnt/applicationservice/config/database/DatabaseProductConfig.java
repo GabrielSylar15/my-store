@@ -1,6 +1,6 @@
 package com.vinhnt.applicationservice.config.database;
 
-import com.vinhnt.applicationservice.adapter.outbound.product.JPAProduct;
+import com.vinhnt.applicationservice.adapter.outbound.product.persistence.JPAProduct;
 import com.vinhnt.common.config.database.DataSourceConfig;
 import com.vinhnt.common.config.property.DataSourceProperties;
 import org.springframework.beans.factory.annotation.Value;

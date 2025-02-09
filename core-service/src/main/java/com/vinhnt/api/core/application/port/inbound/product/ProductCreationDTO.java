@@ -11,6 +11,5 @@ public record ProductCreationDTO(CategoryId categoryId,
                                  PreOrder preOrder,
                                  ProductDimension productDimension,
                                  int stockQuantity,
-                                 Video video,
-                                 Wholesale wholesale) {
+                                 Video video) {
 }

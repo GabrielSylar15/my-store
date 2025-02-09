@@ -1,4 +1,34 @@
 package com.vinhnt.applicationservice.config;
 
+import com.vinhnt.api.core.application.port.inbound.product.CategoryCreation;
+import com.vinhnt.api.core.application.port.inbound.product.CategoryUpdate;
+import com.vinhnt.api.core.application.port.oubound.product.CategoryRepository;
+import com.vinhnt.api.core.application.usecase.product.CategoryCreationImpl;
+import com.vinhnt.api.core.application.usecase.product.CategoryUpdateImpl;
+import com.vinhnt.api.core.domain.model.inventory.CategoryCreationService;
+import com.vinhnt.api.core.domain.model.inventory.CategoryUpdateService;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+
+@Configuration
 public class SpringBeanConfiguration {
+    @Bean
+    public CategoryCreationService categoryCreationService(CategoryRepository categoryRepository) {
+        return new CategoryCreationService(categoryRepository);
+    }
+
+    @Bean
+    public CategoryCreation categoryCreation(CategoryRepository categoryRepository, CategoryCreationService categoryCreationService) {
+        return new CategoryCreationImpl(categoryCreationService, categoryRepository);
+    }
+
+    @Bean
+    public CategoryUpdateService categoryUpdate(CategoryRepository categoryRepository) {
+        return new CategoryUpdateService(categoryRepository);
+    }
+
+    @Bean
+    public CategoryUpdate updateCategory(CategoryRepository categoryRepository, CategoryUpdateService categoryUpdateService) {
+        return new CategoryUpdateImpl(categoryRepository, categoryUpdateService);
+    }
 }

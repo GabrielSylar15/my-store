@@ -21,8 +21,9 @@ public class Product implements AggregateRoot<ProductId> {
     private ProductDimension productDimension;
     private int stockQuantity;
     private Video video;
-    private Wholesale wholesale;
+    private ProductStatus status;
     private long totalSold;
+    private int displayPriority;
     private List<TierVariation> tierVariations;
 
     public void validate(ProductRepository productRepository,
@@ -41,7 +42,6 @@ public class Product implements AggregateRoot<ProductId> {
             ProductDimension productDimension,
             int stockQuantity,
             Video video,
-            Wholesale wholesale,
             List<TierVariation> tierVariations) throws InvalidProductException {
         this.id = id;
         this.categoryId = categoryId;
@@ -61,11 +61,9 @@ public class Product implements AggregateRoot<ProductId> {
         this.images = images;
         this.name = name;
         this.stockQuantity = stockQuantity;
-
         this.preOrder = preOrder;
         this.productDimension = productDimension;
         this.video = video;
-        this.wholesale = wholesale;
         this.tierVariations = tierVariations;
     }
 
@@ -103,10 +101,6 @@ public class Product implements AggregateRoot<ProductId> {
 
     int getStockQuantity() {
         return stockQuantity;
-    }
-
-    Wholesale getWholesale() {
-        return wholesale;
     }
 
     long getTotalSold() {

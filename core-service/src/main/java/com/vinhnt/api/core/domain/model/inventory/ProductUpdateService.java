@@ -25,9 +25,8 @@ public class ProductUpdateService {
                                PreOrder preOrder,
                                ProductDimension productDimension,
                                int stockQuantity,
-                               Video video,
-                               Wholesale wholesale) throws InvalidProductException {
-        Product product = new Product(productId, categoryId, description, images, name, preOrder, productDimension, stockQuantity, video, wholesale, null);
+                               Video video) throws InvalidProductException {
+        Product product = new Product(productId, categoryId, description, images, name, preOrder, productDimension, stockQuantity, video, null);
         ValidationNotificationHandlerImpl notificationHandler = new ValidationNotificationHandlerImpl();
         product.validate(productRepository, categoryRepository, notificationHandler);
         if (notificationHandler.messages().isEmpty()) {
@@ -47,7 +46,6 @@ public class ProductUpdateService {
                 product.getProductDimension(),
                 product.getStockQuantity(),
                 product.getVideo(),
-                product.getWholesale(),
                 product.getTierVariations());
         if (CollectionUtils.isEmpty(tierVariations)) {
             throw new InvalidProductException("Tier variations cannot be empty");
