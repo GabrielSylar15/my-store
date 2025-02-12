@@ -1,8 +1,8 @@
 package com.vinhnt.applicationservice.config;
 
-import com.vinhnt.api.core.application.port.inbound.product.CategoryCreation;
-import com.vinhnt.api.core.application.port.inbound.product.CategoryUpdate;
-import com.vinhnt.api.core.application.port.oubound.product.CategoryRepository;
+import com.vinhnt.api.core.application.port.inbound.inventory.CategoryCreation;
+import com.vinhnt.api.core.application.port.inbound.inventory.CategoryUpdate;
+import com.vinhnt.api.core.application.port.outbound.inventory.CategoryRepository;
 import com.vinhnt.api.core.application.usecase.product.CategoryCreationImpl;
 import com.vinhnt.api.core.application.usecase.product.CategoryUpdateImpl;
 import com.vinhnt.api.core.domain.model.inventory.CategoryCreationService;

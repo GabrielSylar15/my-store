@@ -1,11 +1,10 @@
 package com.vinhnt.api.core.domain.model.inventory;
 
-import com.vinhnt.api.core.application.port.oubound.product.CategoryRepository;
-import com.vinhnt.api.core.application.port.oubound.product.ProductRepository;
+import com.vinhnt.api.core.application.port.outbound.inventory.CategoryRepository;
+import com.vinhnt.api.core.application.port.outbound.inventory.ProductRepository;
 import com.vinhnt.api.core.domain.model.inventory.exception.InvalidProductException;
 import org.springframework.util.CollectionUtils;
 
-import java.util.Collection;
 import java.util.List;
 
 public class ProductUpdateService {

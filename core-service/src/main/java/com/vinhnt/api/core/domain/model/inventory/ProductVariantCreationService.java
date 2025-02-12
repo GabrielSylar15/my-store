@@ -1,7 +1,7 @@
 package com.vinhnt.api.core.domain.model.inventory;
 
-import com.vinhnt.api.core.application.port.oubound.product.ProductRepository;
-import com.vinhnt.api.core.application.port.oubound.product.ProductVariantRepository;
+import com.vinhnt.api.core.application.port.outbound.inventory.ProductRepository;
+import com.vinhnt.api.core.application.port.outbound.inventory.ProductVariantRepository;
 import com.vinhnt.api.core.domain.model.inventory.exception.InvalidProductVariantException;
 
 import java.util.List;

@@ -1,6 +1,6 @@
 package com.vinhnt.api.core.domain.model.inventory;
 
-import com.vinhnt.api.core.application.port.oubound.product.CategoryRepository;
+import com.vinhnt.api.core.application.port.outbound.inventory.CategoryRepository;
 import com.vinhnt.api.core.domain.model.inventory.exception.InvalidCategoryException;
 
 public class CategoryUpdateService {

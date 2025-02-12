@@ -1,6 +1,6 @@
 package com.vinhnt.api.core.domain.model.inventory;
 
-import com.vinhnt.api.core.application.port.oubound.product.ProductRepository;
+import com.vinhnt.api.core.application.port.outbound.inventory.ProductRepository;
 import com.vinhnt.api.core.domain.model.AggregateRoot;
 import com.vinhnt.api.core.domain.model.ValidationNotificationHandler;
 import com.vinhnt.api.core.domain.model.Validator;

@@ -1,8 +1,8 @@
 package com.vinhnt.api.core.application.usecase.product;
 
-import com.vinhnt.api.core.application.port.inbound.product.CategoryCreation;
-import com.vinhnt.api.core.application.port.inbound.product.CategoryCreationDTO;
-import com.vinhnt.api.core.application.port.oubound.product.CategoryRepository;
+import com.vinhnt.api.core.application.port.inbound.inventory.CategoryCreation;
+import com.vinhnt.api.core.application.port.inbound.inventory.CategoryCreationDTO;
+import com.vinhnt.api.core.application.port.outbound.inventory.CategoryRepository;
 import com.vinhnt.api.core.domain.model.inventory.Category;
 import com.vinhnt.api.core.domain.model.inventory.CategoryCreationService;
 import com.vinhnt.api.core.domain.model.inventory.exception.InvalidCategoryException;

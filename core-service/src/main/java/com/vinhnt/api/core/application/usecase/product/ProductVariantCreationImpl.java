@@ -1,11 +1,11 @@
 package com.vinhnt.api.core.application.usecase.product;
 
-import com.vinhnt.api.core.application.port.inbound.product.ProductVariantCreation;
-import com.vinhnt.api.core.application.port.inbound.product.ProductVariantCreationDTO;
-import com.vinhnt.api.core.application.port.inbound.product.ProductVariantCreationOutputDTO;
-import com.vinhnt.api.core.application.port.inbound.product.ProductVariantDTO;
-import com.vinhnt.api.core.application.port.oubound.product.ProductRepository;
-import com.vinhnt.api.core.application.port.oubound.product.ProductVariantRepository;
+import com.vinhnt.api.core.application.port.inbound.inventory.ProductVariantCreation;
+import com.vinhnt.api.core.application.port.inbound.inventory.ProductVariantCreationDTO;
+import com.vinhnt.api.core.application.port.inbound.inventory.ProductVariantCreationOutputDTO;
+import com.vinhnt.api.core.application.port.inbound.inventory.ProductVariantDTO;
+import com.vinhnt.api.core.application.port.outbound.inventory.ProductRepository;
+import com.vinhnt.api.core.application.port.outbound.inventory.ProductVariantRepository;
 import com.vinhnt.api.core.domain.model.inventory.Product;
 import com.vinhnt.api.core.domain.model.inventory.ProductUpdateService;
 import com.vinhnt.api.core.domain.model.inventory.ProductVariant;

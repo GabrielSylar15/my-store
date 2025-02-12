@@ -1,8 +1,8 @@
 package com.vinhnt.api.core.application.usecase.product;
 
-import com.vinhnt.api.core.application.port.inbound.product.ProductCreation;
-import com.vinhnt.api.core.application.port.inbound.product.ProductCreationDTO;
-import com.vinhnt.api.core.application.port.oubound.product.ProductRepository;
+import com.vinhnt.api.core.application.port.inbound.inventory.ProductCreation;
+import com.vinhnt.api.core.application.port.inbound.inventory.ProductCreationDTO;
+import com.vinhnt.api.core.application.port.outbound.inventory.ProductRepository;
 import com.vinhnt.api.core.domain.model.inventory.Product;
 import com.vinhnt.api.core.domain.model.inventory.ProductCreationService;
 import com.vinhnt.api.core.domain.model.inventory.exception.InvalidProductException;

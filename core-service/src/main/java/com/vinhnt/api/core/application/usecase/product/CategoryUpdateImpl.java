@@ -1,8 +1,8 @@
 package com.vinhnt.api.core.application.usecase.product;
 
-import com.vinhnt.api.core.application.port.inbound.product.CategoryUpdate;
-import com.vinhnt.api.core.application.port.inbound.product.CategoryUpdateDTO;
-import com.vinhnt.api.core.application.port.oubound.product.CategoryRepository;
+import com.vinhnt.api.core.application.port.inbound.inventory.CategoryUpdate;
+import com.vinhnt.api.core.application.port.inbound.inventory.CategoryUpdateDTO;
+import com.vinhnt.api.core.application.port.outbound.inventory.CategoryRepository;
 import com.vinhnt.api.core.domain.model.inventory.Category;
 import com.vinhnt.api.core.domain.model.inventory.CategoryUpdateService;
 import com.vinhnt.api.core.domain.model.inventory.exception.InvalidCategoryException;
