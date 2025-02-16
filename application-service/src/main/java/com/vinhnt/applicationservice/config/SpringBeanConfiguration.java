@@ -1,10 +1,12 @@
 package com.vinhnt.applicationservice.config;
 
 import com.vinhnt.api.core.application.port.inbound.inventory.CategoryCreation;
+import com.vinhnt.api.core.application.port.inbound.inventory.CategoryDetail;
 import com.vinhnt.api.core.application.port.inbound.inventory.CategoryUpdate;
 import com.vinhnt.api.core.application.port.outbound.inventory.CategoryRepository;
-import com.vinhnt.api.core.application.usecase.product.CategoryCreationImpl;
-import com.vinhnt.api.core.application.usecase.product.CategoryUpdateImpl;
+import com.vinhnt.api.core.application.usecase.inventory.CategoryCreationImpl;
+import com.vinhnt.api.core.application.usecase.inventory.CategoryDetailImpl;
+import com.vinhnt.api.core.application.usecase.inventory.CategoryUpdateImpl;
 import com.vinhnt.api.core.domain.model.inventory.CategoryCreationService;
 import com.vinhnt.api.core.domain.model.inventory.CategoryUpdateService;
 import org.springframework.context.annotation.Bean;
@@ -30,5 +32,10 @@ public class SpringBeanConfiguration {
     @Bean
     public CategoryUpdate updateCategory(CategoryRepository categoryRepository, CategoryUpdateService categoryUpdateService) {
         return new CategoryUpdateImpl(categoryRepository, categoryUpdateService);
+    }
+
+    @Bean
+    public CategoryDetail categoryDetail(CategoryRepository categoryRepository) {
+        return new CategoryDetailImpl(categoryRepository);
     }
 }

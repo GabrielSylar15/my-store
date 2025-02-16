@@ -73,4 +73,48 @@ public class Category implements Entity<CategoryId> {
         return !Objects.isNull(string) && !string.isBlank() && string.length() <= length;
     }
 
+    public static class CategoryMemento {
+        private String name;
+        private String description;
+        private CategoryId parentId;
+        private CategoryStatus status;
+        private CategoryId id;
+
+        public CategoryMemento(String description, CategoryId id, String name, CategoryId parentId, CategoryStatus status) {
+            this.description = description;
+            this.id = id;
+            this.name = name;
+            this.parentId = parentId;
+            this.status = status;
+        }
+
+        public String getDescription() {
+            return description;
+        }
+
+        public CategoryId getId() {
+            return id;
+        }
+
+        public String getName() {
+            return name;
+        }
+
+        public CategoryId getParentId() {
+            return parentId;
+        }
+
+        public CategoryStatus getStatus() {
+            return status;
+        }
+
+        public Category restore() throws InvalidCategoryException {
+            return new Category(this.id, this.name, this.description, this.parentId, this.status);
+        }
+    }
+
+    public CategoryMemento createSnapshot() {
+        return new CategoryMemento(this.description, this.id, this.name, this.parentId, this.status);
+    }
+
 }

@@ -1,6 +1,8 @@
 package com.vinhnt.api.core.domain.model.inventory.exception;
 
-public class InvalidProductException extends Exception {
+import com.vinhnt.common.exception.BadRequestException;
+
+public class InvalidProductException extends BadRequestException {
     public InvalidProductException(String message) {
         super(message);
     }
