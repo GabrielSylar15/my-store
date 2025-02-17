@@ -21,16 +21,16 @@ import java.util.List;
 )
 @Configuration
 public class DatabaseInventoryConfig {
-    public final static String ENTITY_MANAGER = "productEntityManager";
-    public final static String TRANS_MANAGER = "productTransactionManager";
-    public final static String DATASOURCE = "productDataSource";
-    @Value("${datasource.product.host}")
+    public final static String ENTITY_MANAGER = "inventoryEntityManager";
+    public final static String TRANS_MANAGER = "inventoryTransactionManager";
+    public final static String DATASOURCE = "inventoryDataSource";
+    @Value("${datasource.inventory.host}")
     private String host;
-    @Value("${datasource.product.database}")
+    @Value("${datasource.inventory.database}")
     private String database;
-    @Value("${datasource.product.username}")
+    @Value("${datasource.inventory.username}")
     private String username;
-    @Value("${datasource.product.password}")
+    @Value("${datasource.inventory.password}")
     private String password;
 
     @Bean(ENTITY_MANAGER)

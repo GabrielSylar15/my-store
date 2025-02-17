@@ -6,7 +6,7 @@ public class PreOrder implements ValueObject {
     private final boolean isPreOrder;
     private final int daysToShip;
 
-    PreOrder(boolean isPreOrder, int daysToShip) {
+    public PreOrder(boolean isPreOrder, int daysToShip) {
         this.isPreOrder = isPreOrder;
         this.daysToShip = daysToShip;
     }

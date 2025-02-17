@@ -3,6 +3,7 @@ package com.vinhnt.applicationservice.adapter.outbound.inventory.persistence;
 import com.vinhnt.api.core.domain.model.inventory.PreOrder;
 import com.vinhnt.api.core.domain.model.inventory.TierVariation;
 import com.vinhnt.applicationservice.adapter.outbound.inventory.persistence.converter.GenericListConverter;
+import com.vinhnt.applicationservice.adapter.outbound.inventory.persistence.converter.PreOrderConverter;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -26,7 +27,7 @@ public class JPAProduct {
     @Column(name = "name")
     private String name;
 
-    @Convert(converter = PreOrder.class)
+    @Convert(converter = PreOrderConverter.class)
     @Column(name = "pre_order")
     private PreOrder preOrder;
 
