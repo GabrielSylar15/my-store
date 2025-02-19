@@ -36,23 +36,23 @@ public class Category implements Entity<CategoryId> {
         categoryValidator.validate();
     }
 
-    CategoryId getId() {
+    public CategoryId getId() {
         return id;
     }
 
-    String getName() {
+    public String getName() {
         return name;
     }
 
-    String getDescription() {
+    public String getDescription() {
         return description;
     }
 
-    CategoryId getParentId() {
+    public CategoryId getParentId() {
         return parentId;
     }
 
-    CategoryStatus getStatus() {
+    public CategoryStatus getStatus() {
         return status;
     }
 

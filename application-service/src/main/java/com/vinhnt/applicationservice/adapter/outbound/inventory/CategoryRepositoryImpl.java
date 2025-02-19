@@ -9,6 +9,7 @@ import com.vinhnt.applicationservice.adapter.outbound.inventory.persistence.JPAC
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Objects;
 
 @Repository
 public class CategoryRepositoryImpl implements CategoryRepository {
@@ -49,11 +50,11 @@ public class CategoryRepositoryImpl implements CategoryRepository {
     private JPACategory convertToJPAModel(Category category) {
         JPACategory jpaCategory = new JPACategory();
         Category.CategoryMemento categoryMemento = category.createSnapshot();
-        jpaCategory.setId(categoryMemento.getId().getId());
+        jpaCategory.setId(Objects.isNull(categoryMemento.getId()) ? null : categoryMemento.getId().getId());
         jpaCategory.setDescription(categoryMemento.getDescription());
         jpaCategory.setName(categoryMemento.getName());
         jpaCategory.setStatus(categoryMemento.getStatus());
-        jpaCategory.setParentId(categoryMemento.getParentId().getId());
+        jpaCategory.setParentId(Objects.isNull(categoryMemento.getParentId()) ? null : categoryMemento.getParentId().getId());
         return jpaCategory;
     }
 
