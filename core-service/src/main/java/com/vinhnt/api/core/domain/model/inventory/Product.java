@@ -13,7 +13,7 @@ import java.util.Objects;
 
 public class Product implements AggregateRoot<ProductId> {
     private ProductId id;
-    private CategoryId categoryId;
+    private Long categoryId;
     private String description;
     private List<Image> images;
     private String name;
@@ -34,7 +34,7 @@ public class Product implements AggregateRoot<ProductId> {
     }
 
     Product(ProductId id,
-            CategoryId categoryId,
+            Long categoryId,
             String description,
             List<Image> images,
             String name,
@@ -67,7 +67,7 @@ public class Product implements AggregateRoot<ProductId> {
         this.tierVariations = tierVariations;
     }
 
-    CategoryId getCategoryId() {
+    Long getCategoryId() {
         return categoryId;
     }
 

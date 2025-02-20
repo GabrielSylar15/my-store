@@ -10,7 +10,7 @@ public class CategoryUpdateService {
         this.categoryRepository = categoryRepository;
     }
 
-    public Category initCategory(CategoryId id, String name, String description, CategoryId parentId, CategoryStatus status) throws InvalidCategoryException{
+    public Category initCategory(Long id, String name, String description, Long parentId, CategoryStatus status) throws InvalidCategoryException{
         Category category = new Category(id, name, description, parentId, status);
         ValidationNotificationHandlerImpl notificationHandler = new ValidationNotificationHandlerImpl();
         category.validate(categoryRepository, notificationHandler);

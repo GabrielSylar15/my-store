@@ -5,17 +5,20 @@ import com.vinhnt.api.core.domain.model.Entity;
 import com.vinhnt.api.core.domain.model.ValidationNotificationHandler;
 import com.vinhnt.api.core.domain.model.Validator;
 import com.vinhnt.api.core.domain.model.inventory.exception.InvalidCategoryException;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
 
 import java.util.Objects;
 
-public class Category implements Entity<CategoryId> {
+@Getter
+public class Category implements Entity<Long> {
     private String name;
     private String description;
-    private CategoryId parentId;
+    private Long parentId;
     private CategoryStatus status;
-    private CategoryId id;
+    private Long id;
 
-    Category(CategoryId id, String name, String description, CategoryId parentId, CategoryStatus status) throws InvalidCategoryException {
+    Category(Long id, String name, String description, Long parentId, CategoryStatus status) throws InvalidCategoryException {
         this.id = id;
         if (isValidStringLength(name, 120)) {
             this.name = name;
@@ -36,26 +39,6 @@ public class Category implements Entity<CategoryId> {
         categoryValidator.validate();
     }
 
-    public CategoryId getId() {
-        return id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public CategoryId getParentId() {
-        return parentId;
-    }
-
-    public CategoryStatus getStatus() {
-        return status;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -73,14 +56,20 @@ public class Category implements Entity<CategoryId> {
         return !Objects.isNull(string) && !string.isBlank() && string.length() <= length;
     }
 
+    public CategoryMemento createSnapshot() {
+        return new CategoryMemento(this.description, this.id, this.name, this.parentId, this.status);
+    }
+
+    @Getter
+    @AllArgsConstructor
     public static class CategoryMemento {
         private String name;
         private String description;
-        private CategoryId parentId;
+        private Long parentId;
         private CategoryStatus status;
-        private CategoryId id;
+        private Long id;
 
-        public CategoryMemento(String description, CategoryId id, String name, CategoryId parentId, CategoryStatus status) {
+        public CategoryMemento(String description, Long id, String name, Long parentId, CategoryStatus status) {
             this.description = description;
             this.id = id;
             this.name = name;
@@ -88,33 +77,9 @@ public class Category implements Entity<CategoryId> {
             this.status = status;
         }
 
-        public String getDescription() {
-            return description;
-        }
-
-        public CategoryId getId() {
-            return id;
-        }
-
-        public String getName() {
-            return name;
-        }
-
-        public CategoryId getParentId() {
-            return parentId;
-        }
-
-        public CategoryStatus getStatus() {
-            return status;
-        }
-
         public Category restore() throws InvalidCategoryException {
             return new Category(this.id, this.name, this.description, this.parentId, this.status);
         }
-    }
-
-    public CategoryMemento createSnapshot() {
-        return new CategoryMemento(this.description, this.id, this.name, this.parentId, this.status);
     }
 
 }

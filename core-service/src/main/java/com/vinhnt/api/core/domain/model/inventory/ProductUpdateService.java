@@ -17,7 +17,7 @@ public class ProductUpdateService {
     }
 
     public Product initProduct(ProductId productId,
-                               CategoryId categoryId,
+                               Long categoryId,
                                String description,
                                List<Image> images,
                                String name,

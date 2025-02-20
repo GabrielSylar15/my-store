@@ -2,12 +2,13 @@ package com.vinhnt.applicationservice.adapter.outbound.inventory;
 
 import com.vinhnt.api.core.application.port.outbound.inventory.CategoryRepository;
 import com.vinhnt.api.core.domain.model.inventory.Category;
-import com.vinhnt.api.core.domain.model.inventory.CategoryId;
+import com.vinhnt.api.core.domain.model.inventory.CategoryStatus;
 import com.vinhnt.api.core.domain.model.inventory.exception.InvalidCategoryException;
 import com.vinhnt.applicationservice.adapter.outbound.inventory.persistence.JPACategory;
 import com.vinhnt.applicationservice.adapter.outbound.inventory.persistence.JPACategoryRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -17,6 +18,24 @@ public class CategoryRepositoryImpl implements CategoryRepository {
 
     public CategoryRepositoryImpl(JPACategoryRepository jpaCategoryRepository) {
         this.jpaCategoryRepository = jpaCategoryRepository;
+    }
+
+    @Override
+    public List<Category> findByParentIdAndStatus(Long parentId, CategoryStatus status) {
+        List<JPACategory> jpaCategories = jpaCategoryRepository.findByParentIdAndStatus(parentId, status);
+        if (jpaCategories.isEmpty()) {
+            return new ArrayList<>();
+        }
+        return jpaCategories.stream().map(this::convertToDomainModel).toList();
+    }
+
+    @Override
+    public Category findFirstByIdAndStatus(Long id, CategoryStatus status) {
+        JPACategory jpaCategory = jpaCategoryRepository.findFirstByIdAndStatus(id, status);
+        if (Objects.isNull(jpaCategory)) {
+            return null;
+        }
+        return convertToDomainModel(jpaCategory);
     }
 
     @Override
@@ -37,8 +56,10 @@ public class CategoryRepositoryImpl implements CategoryRepository {
     }
 
     @Override
-    public Category findById(CategoryId categoryId) {
-        return null;
+    public Category findById(Long id) {
+        return jpaCategoryRepository.findById(id)
+                .map(this::convertToDomainModel)
+                .orElse(null);
     }
 
     @Override
@@ -50,16 +71,16 @@ public class CategoryRepositoryImpl implements CategoryRepository {
     private JPACategory convertToJPAModel(Category category) {
         JPACategory jpaCategory = new JPACategory();
         Category.CategoryMemento categoryMemento = category.createSnapshot();
-        jpaCategory.setId(Objects.isNull(categoryMemento.getId()) ? null : categoryMemento.getId().getId());
+        jpaCategory.setId(categoryMemento.getId());
         jpaCategory.setDescription(categoryMemento.getDescription());
         jpaCategory.setName(categoryMemento.getName());
         jpaCategory.setStatus(categoryMemento.getStatus());
-        jpaCategory.setParentId(Objects.isNull(categoryMemento.getParentId()) ? null : categoryMemento.getParentId().getId());
+        jpaCategory.setParentId(categoryMemento.getParentId());
         return jpaCategory;
     }
 
     private Category convertToDomainModel(JPACategory jpaCategory) throws InvalidCategoryException {
-        Category.CategoryMemento categoryMemento = new Category.CategoryMemento(jpaCategory.getDescription(), new CategoryId(jpaCategory.getId()), jpaCategory.getName(), new CategoryId(jpaCategory.getParentId()), jpaCategory.getStatus());
+        Category.CategoryMemento categoryMemento = new Category.CategoryMemento(jpaCategory.getDescription(), jpaCategory.getId(), jpaCategory.getName(), jpaCategory.getParentId(), jpaCategory.getStatus());
         return categoryMemento.restore();
     }
 }

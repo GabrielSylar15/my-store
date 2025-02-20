@@ -7,8 +7,8 @@ import com.vinhnt.api.core.domain.model.Validator;
 import java.util.Objects;
 
 public class CategoryValidator extends Validator {
-    private Category category;
-    private CategoryRepository categoryRepository;
+    private final Category category;
+    private final CategoryRepository categoryRepository;
 
     public CategoryValidator(ValidationNotificationHandler validationNotificationHandler, Category category, CategoryRepository categoryRepository) {
         super(validationNotificationHandler);

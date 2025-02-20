@@ -5,18 +5,25 @@ import com.vinhnt.api.core.application.port.inbound.inventory.CategoryUpdateDTO;
 import com.vinhnt.applicationservice.service.product.CategoryApplicationService;
 import com.vinhnt.common.dto.ResponseBuilder;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/v1/categories")
 @RequiredArgsConstructor
+@Slf4j
 public class CategoryController {
     private final CategoryApplicationService categoryApplicationService;
 
     @PostMapping()
     public ResponseEntity<?> addCategory(@RequestBody CategoryCreationDTO categoryCreationDTO) {
         return ResponseEntity.ok(ResponseBuilder.success(categoryApplicationService.createCategory(categoryCreationDTO)));
+    }
+
+    @GetMapping
+    public ResponseEntity<?> getAllParentCategories() {
+        return ResponseEntity.ok(ResponseBuilder.successList(categoryApplicationService.getCategoryList()));
     }
 
     @GetMapping("/{id}")

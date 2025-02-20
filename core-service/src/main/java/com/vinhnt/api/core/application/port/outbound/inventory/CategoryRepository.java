@@ -2,7 +2,13 @@ package com.vinhnt.api.core.application.port.outbound.inventory;
 
 import com.vinhnt.api.core.application.port.outbound.BaseRepository;
 import com.vinhnt.api.core.domain.model.inventory.Category;
-import com.vinhnt.api.core.domain.model.inventory.CategoryId;
+import com.vinhnt.api.core.domain.model.inventory.CategoryStatus;
 
-public interface CategoryRepository extends BaseRepository<Category, CategoryId> {
+import java.util.List;
+
+public interface CategoryRepository extends BaseRepository<Category, Long> {
+    List<Category> findByParentIdAndStatus(Long parentId, CategoryStatus status);
+
+    Category findFirstByIdAndStatus(Long id, CategoryStatus status);
+
 }

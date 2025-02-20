@@ -15,7 +15,7 @@ public class ProductCreationService {
         this.categoryRepository = categoryRepository;
     }
 
-    public Product initProduct(CategoryId categoryId,
+    public Product initProduct(Long categoryId,
                                String description,
                                List<Image> images,
                                String name,

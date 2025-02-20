@@ -1,20 +1,8 @@
 package com.vinhnt.api.core.application.port.inbound.inventory;
 
-import com.vinhnt.api.core.domain.model.inventory.CategoryId;
+import com.fasterxml.jackson.databind.PropertyNamingStrategies;
+import com.fasterxml.jackson.databind.annotation.JsonNaming;
 
-public record CategoryCreationDTO(String name, String description, CategoryId parentId) {
-    @Override
-    public String name() {
-        return name;
-    }
-
-    @Override
-    public String description() {
-        return description;
-    }
-
-    @Override
-    public CategoryId parentId() {
-        return parentId;
-    }
+@JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
+public record CategoryCreationDTO(String name, String description, Long parentId) {
 }
