@@ -16,7 +16,7 @@ public class ProductUpdateService {
         this.categoryRepository = categoryRepository;
     }
 
-    public Product initProduct(ProductId productId,
+    public Product initProduct(Long productId,
                                Long categoryId,
                                String description,
                                List<Image> images,

@@ -1,5 +1,6 @@
 package com.vinhnt.applicationservice.adapter.inbound;
 
+import com.vinhnt.api.core.application.port.inbound.inventory.ProductCreationDTO;
 import com.vinhnt.api.core.domain.model.inventory.Product;
 import com.vinhnt.applicationservice.service.product.ProductApplicationService;
 import com.vinhnt.common.dto.ResponseBuilder;
@@ -14,8 +15,8 @@ public class ProductController {
     private final ProductApplicationService productApplicationService;
 
     @PostMapping
-    public ResponseEntity<?> createProduct(@RequestBody Product product) {
-        return ResponseEntity.ok(ResponseBuilder.success(productApplicationService.createProduct(product)));
+    public ResponseEntity<?> createProduct(@RequestBody ProductCreationDTO productCreationDTO) {
+        return ResponseEntity.ok(ResponseBuilder.success(productApplicationService.createProduct(productCreationDTO)));
     }
 
     @PutMapping("/{id}")

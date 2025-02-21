@@ -16,7 +16,7 @@ public class ProductVariantCreationService {
     }
 
     public ProductVariant initProductVariant(List<TierVariation> tierVariation,
-                                             ProductId productId,
+                                             Long productId,
                                              ProductPriceInfo priceInfo,
                                              ProductVariantStatus status,
                                              int stockQuantity,

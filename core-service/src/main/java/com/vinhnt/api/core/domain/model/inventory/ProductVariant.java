@@ -13,7 +13,7 @@ import java.util.Objects;
 
 public class ProductVariant implements AggregateRoot<ProductVariantId> {
     private ProductVariantId id;
-    private ProductId productId;
+    private Long productId;
     private ProductPriceInfo priceInfo;
     private ProductVariantStatus status;
     private int stockQuantity;
@@ -22,7 +22,7 @@ public class ProductVariant implements AggregateRoot<ProductVariantId> {
     private int[] tierIndex;
 
     ProductVariant(ProductVariantId id,
-                   ProductId productId,
+                   Long productId,
                    ProductPriceInfo priceInfo,
                    ProductVariantStatus status,
                    int stockQuantity,
@@ -66,7 +66,7 @@ public class ProductVariant implements AggregateRoot<ProductVariantId> {
         return priceInfo;
     }
 
-    ProductId getProductId() {
+    Long getProductId() {
         return productId;
     }
 

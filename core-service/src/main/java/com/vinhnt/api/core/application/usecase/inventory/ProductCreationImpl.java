@@ -22,10 +22,10 @@ public class ProductCreationImpl implements ProductCreation {
                 productCreationDTO.description(),
                 productCreationDTO.images(),
                 productCreationDTO.name(),
-                productCreationDTO.preOrder(),
+                productCreationDTO.preOrder().toPreOrder(),
                 productCreationDTO.productDimension(),
                 productCreationDTO.stockQuantity(),
-                productCreationDTO.video());
+                productCreationDTO.video().toVideo());
         return productRepository.save(product);
     }
 }

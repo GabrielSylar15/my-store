@@ -1,16 +1,13 @@
 package com.vinhnt.applicationservice.config;
 
-import com.vinhnt.api.core.application.port.inbound.inventory.CategoryCreation;
-import com.vinhnt.api.core.application.port.inbound.inventory.CategoryDetail;
-import com.vinhnt.api.core.application.port.inbound.inventory.CategoryList;
-import com.vinhnt.api.core.application.port.inbound.inventory.CategoryUpdate;
+import com.vinhnt.api.core.application.port.inbound.inventory.*;
 import com.vinhnt.api.core.application.port.outbound.inventory.CategoryRepository;
-import com.vinhnt.api.core.application.usecase.inventory.CategoryCreationImpl;
-import com.vinhnt.api.core.application.usecase.inventory.CategoryDetailImpl;
-import com.vinhnt.api.core.application.usecase.inventory.CategoryListImpl;
-import com.vinhnt.api.core.application.usecase.inventory.CategoryUpdateImpl;
+import com.vinhnt.api.core.application.port.outbound.inventory.ProductRepository;
+import com.vinhnt.api.core.application.usecase.inventory.*;
 import com.vinhnt.api.core.domain.model.inventory.CategoryCreationService;
 import com.vinhnt.api.core.domain.model.inventory.CategoryUpdateService;
+import com.vinhnt.api.core.domain.model.inventory.ProductCreationService;
+import com.vinhnt.api.core.domain.model.inventory.ProductUpdateService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -44,5 +41,25 @@ public class SpringBeanConfiguration {
     @Bean
     public CategoryList categoryList(CategoryRepository categoryRepository) {
         return new CategoryListImpl(categoryRepository);
+    }
+
+    @Bean
+    public ProductCreationService productCreationService(ProductRepository productRepository, CategoryRepository categoryRepository) {
+        return new ProductCreationService(productRepository, categoryRepository);
+    }
+
+    @Bean
+    public ProductCreation productCreation(ProductRepository productRepository, ProductCreationService productCreationService) {
+        return new ProductCreationImpl(productRepository, productCreationService);
+    }
+
+    @Bean
+    public ProductUpdateService productUpdateService(ProductRepository productRepository, CategoryRepository categoryRepository) {
+        return new ProductUpdateService(productRepository, categoryRepository);
+    }
+
+    @Bean
+    public ProductUpdate productUpdate(ProductRepository productRepository, ProductUpdateService productUpdateService) {
+        return new ProductUpdateImpl();
     }
 }

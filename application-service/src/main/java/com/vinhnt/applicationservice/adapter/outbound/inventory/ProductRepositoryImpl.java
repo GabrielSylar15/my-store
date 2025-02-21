@@ -2,7 +2,6 @@ package com.vinhnt.applicationservice.adapter.outbound.inventory;
 
 import com.vinhnt.api.core.application.port.outbound.inventory.ProductRepository;
 import com.vinhnt.api.core.domain.model.inventory.Product;
-import com.vinhnt.api.core.domain.model.inventory.ProductId;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -26,7 +25,7 @@ public class ProductRepositoryImpl implements ProductRepository {
     }
 
     @Override
-    public Product findById(ProductId productId) {
+    public Product findById(Long productId) {
         return null;
     }
 

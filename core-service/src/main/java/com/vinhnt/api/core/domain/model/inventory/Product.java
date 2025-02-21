@@ -11,8 +11,8 @@ import org.springframework.util.CollectionUtils;
 import java.util.List;
 import java.util.Objects;
 
-public class Product implements AggregateRoot<ProductId> {
-    private ProductId id;
+public class Product implements AggregateRoot<Long> {
+    private Long id;
     private Long categoryId;
     private String description;
     private List<Image> images;
@@ -33,7 +33,7 @@ public class Product implements AggregateRoot<ProductId> {
         productValidator.validate();
     }
 
-    Product(ProductId id,
+    Product(Long id,
             Long categoryId,
             String description,
             List<Image> images,
@@ -75,7 +75,7 @@ public class Product implements AggregateRoot<ProductId> {
         return description;
     }
 
-    ProductId getId() {
+    Long getId() {
         return id;
     }
 
