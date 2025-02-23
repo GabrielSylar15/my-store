@@ -7,7 +7,6 @@ import com.vinhnt.api.core.application.usecase.inventory.*;
 import com.vinhnt.api.core.domain.model.inventory.CategoryCreationService;
 import com.vinhnt.api.core.domain.model.inventory.CategoryUpdateService;
 import com.vinhnt.api.core.domain.model.inventory.ProductCreationService;
-import com.vinhnt.api.core.domain.model.inventory.ProductUpdateService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -53,13 +52,9 @@ public class SpringBeanConfiguration {
         return new ProductCreationImpl(productRepository, productCreationService);
     }
 
-    @Bean
-    public ProductUpdateService productUpdateService(ProductRepository productRepository, CategoryRepository categoryRepository) {
-        return new ProductUpdateService(productRepository, categoryRepository);
-    }
 
     @Bean
-    public ProductUpdate productUpdate(ProductRepository productRepository, ProductUpdateService productUpdateService) {
+    public ProductUpdate productUpdate(ProductRepository productRepository) {
         return new ProductUpdateImpl();
     }
 }

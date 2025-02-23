@@ -1,5 +1,6 @@
 package com.vinhnt.applicationservice.adapter.outbound.inventory.persistence;
 
+import com.vinhnt.api.core.domain.model.inventory.Image;
 import com.vinhnt.api.core.domain.model.inventory.ProductStatus;
 import com.vinhnt.api.core.domain.model.inventory.TierVariation;
 import com.vinhnt.api.core.domain.model.inventory.Video;
@@ -53,7 +54,7 @@ public class JPAProduct {
 
     @Column(name = "images")
     @Convert(converter = GenericListConverter.class)
-    private List<String> images;
+    private List<Image> images;
 
     @Column(name = "weight")
     private Float weight;

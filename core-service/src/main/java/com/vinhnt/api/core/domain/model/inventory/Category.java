@@ -57,7 +57,7 @@ public class Category implements Entity<Long> {
     }
 
     public CategoryMemento createSnapshot() {
-        return new CategoryMemento(this.description, this.id, this.name, this.parentId, this.status);
+        return new CategoryMemento(this.name, this.description, this.parentId, this.status, this.id);
     }
 
     @Getter
@@ -68,14 +68,6 @@ public class Category implements Entity<Long> {
         private Long parentId;
         private CategoryStatus status;
         private Long id;
-
-        public CategoryMemento(String description, Long id, String name, Long parentId, CategoryStatus status) {
-            this.description = description;
-            this.id = id;
-            this.name = name;
-            this.parentId = parentId;
-            this.status = status;
-        }
 
         public Category restore() throws InvalidCategoryException {
             return new Category(this.id, this.name, this.description, this.parentId, this.status);

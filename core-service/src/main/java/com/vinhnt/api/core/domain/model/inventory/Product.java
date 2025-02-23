@@ -6,12 +6,17 @@ import com.vinhnt.api.core.domain.model.AggregateRoot;
 import com.vinhnt.api.core.domain.model.ValidationNotificationHandler;
 import com.vinhnt.api.core.domain.model.Validator;
 import com.vinhnt.api.core.domain.model.inventory.exception.InvalidProductException;
+import com.vinhnt.api.core.domain.model.inventory.exception.InvalidProductVariantException;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
 import org.springframework.util.CollectionUtils;
 
 import java.util.List;
 import java.util.Objects;
 
+@Getter
 public class Product implements AggregateRoot<Long> {
+    private List<TierVariation> tierVariations;
     private Long id;
     private Long categoryId;
     private String description;
@@ -24,14 +29,6 @@ public class Product implements AggregateRoot<Long> {
     private ProductStatus status;
     private long totalSold;
     private int displayPriority;
-    private List<TierVariation> tierVariations;
-
-    public void validate(ProductRepository productRepository,
-                         CategoryRepository categoryRepository,
-                         ValidationNotificationHandler validationNotificationHandler) {
-        Validator productValidator = new ProductValidator(validationNotificationHandler, categoryRepository, productRepository, this);
-        productValidator.validate();
-    }
 
     Product(Long id,
             Long categoryId,
@@ -42,6 +39,9 @@ public class Product implements AggregateRoot<Long> {
             ProductDimension productDimension,
             int stockQuantity,
             Video video,
+            ProductStatus status,
+            long totalSold,
+            int displayPriority,
             List<TierVariation> tierVariations) throws InvalidProductException {
         this.id = id;
         this.categoryId = categoryId;
@@ -63,52 +63,71 @@ public class Product implements AggregateRoot<Long> {
         this.stockQuantity = stockQuantity;
         this.preOrder = preOrder;
         this.productDimension = productDimension;
+        this.status = status;
+        this.totalSold = totalSold;
+        this.displayPriority = displayPriority;
         this.video = video;
         this.tierVariations = tierVariations;
     }
 
-    Long getCategoryId() {
-        return categoryId;
+    public void validate(ProductRepository productRepository,
+                         CategoryRepository categoryRepository,
+                         ValidationNotificationHandler validationNotificationHandler) {
+        Validator productValidator = new ProductValidator(validationNotificationHandler, categoryRepository, productRepository, this);
+        productValidator.validate();
     }
 
-    String getDescription() {
-        return description;
+    public Product updateProductInfo(
+            ProductRepository productRepository,
+            CategoryRepository categoryRepository,
+            Long categoryId,
+            String description,
+            List<Image> images,
+            String name,
+            PreOrder preOrder,
+            ProductDimension productDimension,
+            int stockQuantity,
+            int displayPriority,
+            Video video) throws InvalidProductException {
+        ValidationNotificationHandlerImpl notificationHandler = new ValidationNotificationHandlerImpl();
+        Product product = new Product(this.id,
+                categoryId,
+                description,
+                images,
+                name,
+                preOrder,
+                productDimension,
+                stockQuantity,
+                video,
+                this.status,
+                this.totalSold,
+                displayPriority,
+                tierVariations);
+        product.validate(productRepository, categoryRepository, notificationHandler);
+        if (notificationHandler.messages().isEmpty()) {
+            return product;
+        } else {
+            throw new InvalidProductException(String.format("Invalid product. Reasons: %s", notificationHandler.concatenatedMessage()));
+        }
     }
 
-    Long getId() {
-        return id;
-    }
-
-    List<Image> getImages() {
-        return images;
-    }
-
-    String getName() {
-        return name;
-    }
-
-    PreOrder getPreOrder() {
-        return preOrder;
-    }
-
-    ProductDimension getProductDimension() {
-        return productDimension;
-    }
-
-    Video getVideo() {
-        return video;
-    }
-
-    int getStockQuantity() {
-        return stockQuantity;
-    }
-
-    long getTotalSold() {
-        return totalSold;
-    }
-
-    List<TierVariation> getTierVariations() {
-        return tierVariations;
+    public Product updateTierVariation(List<TierVariation> tierVariations) throws InvalidProductException {
+        if (CollectionUtils.isEmpty(tierVariations)) {
+            throw new InvalidProductException("Tier variations cannot be empty");
+        }
+        return new Product(this.id,
+                this.categoryId,
+                this.description,
+                this.images,
+                this.name,
+                this.preOrder,
+                this.productDimension,
+                this.stockQuantity,
+                this.video,
+                this.status,
+                this.totalSold,
+                this.displayPriority,
+                tierVariations);
     }
 
     private boolean isValidStringLength(String string, int length) {
@@ -117,5 +136,55 @@ public class Product implements AggregateRoot<Long> {
 
     private boolean isValidNumber(int value, int min, int max) {
         return value >= min && value <= max;
+    }
+
+    public ProductMemento createSnapshot() {
+        return new ProductMemento(this.id,
+                this.categoryId,
+                this.description,
+                this.images,
+                this.name,
+                this.preOrder,
+                this.productDimension,
+                this.stockQuantity,
+                this.video,
+                this.status,
+                this.totalSold,
+                this.displayPriority,
+                this.tierVariations);
+    }
+
+    @Getter
+    @AllArgsConstructor
+    public static class ProductMemento {
+        private Long id;
+        private Long categoryId;
+        private String description;
+        private List<Image> images;
+        private String name;
+        private PreOrder preOrder;
+        private ProductDimension productDimension;
+        private int stockQuantity;
+        private Video video;
+        private ProductStatus status;
+        private long totalSold;
+        private int displayPriority;
+        private List<TierVariation> tierVariations;
+
+        public Product restore() throws InvalidProductVariantException {
+            return new Product(this.id,
+                    this.categoryId,
+                    this.description,
+                    this.images,
+                    this.name,
+                    this.preOrder,
+                    this.productDimension,
+                    this.stockQuantity,
+                    this.video,
+                    this.status,
+                    this.totalSold,
+                    this.displayPriority,
+                    this.tierVariations);
+        }
     }
 }

@@ -80,7 +80,7 @@ public class CategoryRepositoryImpl implements CategoryRepository {
     }
 
     private Category convertToDomainModel(JPACategory jpaCategory) throws InvalidCategoryException {
-        Category.CategoryMemento categoryMemento = new Category.CategoryMemento(jpaCategory.getDescription(), jpaCategory.getId(), jpaCategory.getName(), jpaCategory.getParentId(), jpaCategory.getStatus());
+        Category.CategoryMemento categoryMemento = new Category.CategoryMemento(jpaCategory.getName(), jpaCategory.getDescription(), jpaCategory.getParentId(), jpaCategory.getStatus(), jpaCategory.getId());
         return categoryMemento.restore();
     }
 }

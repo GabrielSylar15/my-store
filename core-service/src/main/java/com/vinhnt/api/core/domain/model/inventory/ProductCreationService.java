@@ -4,6 +4,7 @@ import com.vinhnt.api.core.application.port.outbound.inventory.CategoryRepositor
 import com.vinhnt.api.core.application.port.outbound.inventory.ProductRepository;
 import com.vinhnt.api.core.domain.model.inventory.exception.InvalidProductException;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ProductCreationService {
@@ -22,8 +23,10 @@ public class ProductCreationService {
                                PreOrder preOrder,
                                ProductDimension productDimension,
                                int stockQuantity,
+                               ProductStatus status,
+                               int displayPriority,
                                Video video) throws InvalidProductException {
-        Product product = new Product(null, categoryId, description, images, name, preOrder, productDimension, stockQuantity, video, null);
+        Product product = new Product(null, categoryId, description, images, name, preOrder, productDimension, stockQuantity, video, status, 0, displayPriority, new ArrayList<>());
         ValidationNotificationHandlerImpl notificationHandler = new ValidationNotificationHandlerImpl();
         product.validate(productRepository, categoryRepository, notificationHandler);
         if (notificationHandler.messages().isEmpty()) {

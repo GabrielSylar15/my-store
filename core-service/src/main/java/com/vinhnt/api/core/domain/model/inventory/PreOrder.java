@@ -1,7 +1,9 @@
 package com.vinhnt.api.core.domain.model.inventory;
 
 import com.vinhnt.api.core.domain.model.ValueObject;
+import lombok.Getter;
 
+@Getter
 public class PreOrder implements ValueObject {
     private final boolean isPreOrder;
     private final int daysToShip;
@@ -11,11 +13,4 @@ public class PreOrder implements ValueObject {
         this.daysToShip = daysToShip;
     }
 
-    boolean getPreOrder() {
-        return isPreOrder;
-    }
-
-    int getDaysToShip() {
-        return daysToShip;
-    }
 }
