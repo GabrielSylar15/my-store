@@ -52,9 +52,8 @@ public class SpringBeanConfiguration {
         return new ProductCreationImpl(productRepository, productCreationService);
     }
 
-
     @Bean
-    public ProductUpdate productUpdate(ProductRepository productRepository) {
-        return new ProductUpdateImpl();
+    public ProductUpdate productUpdate(ProductRepository productRepository, CategoryRepository categoryRepository) {
+        return new ProductUpdateImpl(productRepository, categoryRepository);
     }
 }

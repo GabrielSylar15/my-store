@@ -48,7 +48,7 @@ public class Product implements AggregateRoot<Long> {
         if (!isValidStringLength(description, 1000)) {
             throw new InvalidProductException("Category description must be non-null, trimmed, and up to 1000 characters");
         }
-        if (CollectionUtils.isEmpty(images) || isValidNumber(images.size(), 0, 9)) {
+        if (CollectionUtils.isEmpty(images) || !isValidNumber(images.size(), 0, 9)) {
             throw new InvalidProductException("Product images must contain at most 9 images");
         }
         if (!isValidStringLength(name, 120)) {
@@ -77,7 +77,7 @@ public class Product implements AggregateRoot<Long> {
         productValidator.validate();
     }
 
-    public Product updateProductInfo(
+    public void updateProductInfo(
             ProductRepository productRepository,
             CategoryRepository categoryRepository,
             Long categoryId,
@@ -104,9 +104,7 @@ public class Product implements AggregateRoot<Long> {
                 displayPriority,
                 tierVariations);
         product.validate(productRepository, categoryRepository, notificationHandler);
-        if (notificationHandler.messages().isEmpty()) {
-            return product;
-        } else {
+        if (!notificationHandler.messages().isEmpty()) {
             throw new InvalidProductException(String.format("Invalid product. Reasons: %s", notificationHandler.concatenatedMessage()));
         }
     }

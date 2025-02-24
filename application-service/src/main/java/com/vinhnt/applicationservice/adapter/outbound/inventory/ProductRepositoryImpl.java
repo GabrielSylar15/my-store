@@ -18,6 +18,11 @@ public class ProductRepositoryImpl implements ProductRepository {
     private final JPAProductRepository jpaProductRepository;
 
     @Override
+    public Product findAvailableProductById(Long productId) {
+        return jpaProductRepository.findAvailableProductById(productId);
+    }
+
+    @Override
     public void delete(Product data) {
 
     }
