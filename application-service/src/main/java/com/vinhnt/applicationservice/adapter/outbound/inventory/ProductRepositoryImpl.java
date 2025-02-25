@@ -19,7 +19,7 @@ public class ProductRepositoryImpl implements ProductRepository {
 
     @Override
     public Product findAvailableProductById(Long productId) {
-        return jpaProductRepository.findAvailableProductById(productId);
+        return convertToDomainModel(jpaProductRepository.findAvailableProductById(productId));
     }
 
     @Override
@@ -63,7 +63,7 @@ public class ProductRepositoryImpl implements ProductRepository {
         productEntity.setName(productMemento.getName());
         productEntity.setImages(productMemento.getImages());
         productEntity.setDisplayPriority(productMemento.getDisplayPriority());
-        productEntity.setDaysToShip(productMemento.getPreOrder().getDaysToShip());
+        productEntity.setDaysToShip(productMemento.getPreOrder().daysToShip());
         productEntity.setIsPreOrder(productMemento.getPreOrder().isPreOrder());
         productEntity.setStatus(productMemento.getStatus());
         productEntity.setCategoryId(productMemento.getCategoryId());

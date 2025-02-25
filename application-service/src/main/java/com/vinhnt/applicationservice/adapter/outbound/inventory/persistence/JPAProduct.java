@@ -4,7 +4,8 @@ import com.vinhnt.api.core.domain.model.inventory.Image;
 import com.vinhnt.api.core.domain.model.inventory.ProductStatus;
 import com.vinhnt.api.core.domain.model.inventory.TierVariation;
 import com.vinhnt.api.core.domain.model.inventory.Video;
-import com.vinhnt.applicationservice.adapter.outbound.inventory.persistence.converter.GenericListConverter;
+import com.vinhnt.applicationservice.adapter.outbound.inventory.persistence.converter.ListImageConverter;
+import com.vinhnt.applicationservice.adapter.outbound.inventory.persistence.converter.TierVariationConverter;
 import com.vinhnt.applicationservice.adapter.outbound.inventory.persistence.converter.VideoConverter;
 import jakarta.persistence.*;
 import lombok.Data;
@@ -49,11 +50,11 @@ public class JPAProduct {
     private ProductStatus status;
 
     @Column(name = "tier_variations")
-    @Convert(converter = GenericListConverter.class)
+    @Convert(converter = TierVariationConverter.class)
     private List<TierVariation> tierVariations;
 
     @Column(name = "images")
-    @Convert(converter = GenericListConverter.class)
+    @Convert(converter = ListImageConverter.class)
     private List<Image> images;
 
     @Column(name = "weight")

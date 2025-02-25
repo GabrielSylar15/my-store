@@ -6,5 +6,5 @@ import org.springframework.data.jpa.repository.Query;
 
 public interface JPAProductRepository extends JpaRepository<JPAProduct, Long> {
     @Query(value = "SELECT * FROM products WHERE id = :productId and status <> 2", nativeQuery = true)
-    Product findAvailableProductById(Long productId);
+    JPAProduct findAvailableProductById(Long productId);
 }
