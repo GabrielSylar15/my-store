@@ -8,6 +8,7 @@ import com.vinhnt.api.core.application.usecase.inventory.*;
 import com.vinhnt.api.core.domain.model.inventory.CategoryCreationService;
 import com.vinhnt.api.core.domain.model.inventory.CategoryUpdateService;
 import com.vinhnt.api.core.domain.model.inventory.ProductCreationService;
+import com.vinhnt.api.core.domain.model.inventory.ProductVariantCreationService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -60,5 +61,15 @@ public class SpringBeanConfiguration {
 
     @Bean ProductDetail productDetail(ProductRepository productRepository, ProductVariantRepository productVariantRepository) {
         return new ProductDetailImpl(productRepository, productVariantRepository);
+    }
+
+    @Bean
+    public ProductVariantCreationService productVariantCreationService(ProductVariantRepository productVariantRepository, ProductRepository productRepository) {
+        return new ProductVariantCreationService(productVariantRepository, productRepository);
+    }
+
+    @Bean
+    public ProductVariantCreation productVariantCreation(ProductVariantRepository productVariantRepository, ProductRepository productRepository, ProductVariantCreationService productVariantCreationService) {
+        return new ProductVariantCreationImpl(productVariantRepository, productRepository, productVariantCreationService);
     }
 }

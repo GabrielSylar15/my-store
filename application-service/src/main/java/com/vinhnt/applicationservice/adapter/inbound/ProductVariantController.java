@@ -1,7 +1,8 @@
 package com.vinhnt.applicationservice.adapter.inbound;
 
-import com.vinhnt.api.core.domain.model.inventory.ProductVariant;
+import com.vinhnt.api.core.application.port.inbound.inventory.ProductVariantCreationDTO;
 import com.vinhnt.applicationservice.service.product.ProductVariantApplicationService;
+import com.vinhnt.common.dto.ResponseBuilder;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -16,7 +17,7 @@ public class ProductVariantController {
     public ProductVariantApplicationService productVariantApplicationService;
 
     @PostMapping("")
-    public ResponseEntity<?> createProductVariant(@RequestBody ProductVariant productVariant) {
-        productVariantApplicationService.
+    public ResponseEntity<?> createProductVariant(@RequestBody ProductVariantCreationDTO productVariantCreationDTO) {
+        return ResponseEntity.ok(ResponseBuilder.success(productVariantApplicationService.createProductVariant(productVariantCreationDTO)));
     }
 }
