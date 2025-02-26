@@ -29,7 +29,7 @@ public class Product implements AggregateRoot<Long> {
     private ProductStatus status;
     private long totalSold;
     private int displayPriority;
-    private int version;
+    private long version;
 
     Product(Long id,
             Long categoryId,
@@ -43,7 +43,7 @@ public class Product implements AggregateRoot<Long> {
             ProductStatus status,
             long totalSold,
             int displayPriority,
-            int version,
+            long version,
             List<TierVariation> tierVariations) throws InvalidProductException {
         this.id = id;
         this.categoryId = categoryId;
@@ -93,21 +93,16 @@ public class Product implements AggregateRoot<Long> {
             int displayPriority,
             Video video) throws InvalidProductException {
         ValidationNotificationHandlerImpl notificationHandler = new ValidationNotificationHandlerImpl();
-        Product product = new Product(this.id,
-                categoryId,
-                description,
-                images,
-                name,
-                preOrder,
-                productDimension,
-                stockQuantity,
-                video,
-                this.status,
-                this.totalSold,
-                displayPriority,
-                this.version,
-                tierVariations);
-        product.validate(productRepository, categoryRepository, notificationHandler);
+        this.categoryId = categoryId;
+        this.description = description;
+        this.images = images;
+        this.name = name;
+        this.preOrder = preOrder;
+        this.productDimension = productDimension;
+        this.stockQuantity = stockQuantity;
+        this.video = video;
+        this.displayPriority = displayPriority;
+        validate(productRepository, categoryRepository, notificationHandler);
         if (!notificationHandler.messages().isEmpty()) {
             throw new InvalidProductException(String.format("Invalid product. Reasons: %s", notificationHandler.concatenatedMessage()));
         }
@@ -154,6 +149,7 @@ public class Product implements AggregateRoot<Long> {
                 this.status,
                 this.totalSold,
                 this.displayPriority,
+                this.version,
                 this.tierVariations);
     }
 
@@ -172,6 +168,7 @@ public class Product implements AggregateRoot<Long> {
         private ProductStatus status;
         private long totalSold;
         private int displayPriority;
+        private long version;
         private List<TierVariation> tierVariations;
 
         public Product restore() throws InvalidProductVariantException {
@@ -187,6 +184,7 @@ public class Product implements AggregateRoot<Long> {
                     this.status,
                     this.totalSold,
                     this.displayPriority,
+                    this.version,
                     this.tierVariations);
         }
     }

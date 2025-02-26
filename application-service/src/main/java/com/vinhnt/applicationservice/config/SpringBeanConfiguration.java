@@ -3,6 +3,7 @@ package com.vinhnt.applicationservice.config;
 import com.vinhnt.api.core.application.port.inbound.inventory.*;
 import com.vinhnt.api.core.application.port.outbound.inventory.CategoryRepository;
 import com.vinhnt.api.core.application.port.outbound.inventory.ProductRepository;
+import com.vinhnt.api.core.application.port.outbound.inventory.ProductVariantRepository;
 import com.vinhnt.api.core.application.usecase.inventory.*;
 import com.vinhnt.api.core.domain.model.inventory.CategoryCreationService;
 import com.vinhnt.api.core.domain.model.inventory.CategoryUpdateService;
@@ -55,5 +56,9 @@ public class SpringBeanConfiguration {
     @Bean
     public ProductUpdate productUpdate(ProductRepository productRepository, CategoryRepository categoryRepository) {
         return new ProductUpdateImpl(productRepository, categoryRepository);
+    }
+
+    @Bean ProductDetail productDetail(ProductRepository productRepository, ProductVariantRepository productVariantRepository) {
+        return new ProductDetailImpl(productRepository, productVariantRepository);
     }
 }

@@ -36,7 +36,7 @@ public class ProductVariantValidator extends Validator {
         }
         for (int i = 0; i < productVariant.getTierIndex().length; i++) {
             TierVariation tierVariation = tierVariations.get(i);
-            if (productVariant.getTierIndex()[i] > tierVariation.getOptions().size() || productVariant.getTierIndex()[i] < 0) {
+            if (productVariant.getTierIndex()[i] > tierVariation.options().size() || productVariant.getTierIndex()[i] < 0) {
                 validationNotificationHandler.handleError("Tier index is invalid");
             }
         }

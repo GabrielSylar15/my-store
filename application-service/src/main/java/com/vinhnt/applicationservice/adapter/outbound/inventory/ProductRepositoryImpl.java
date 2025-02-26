@@ -70,6 +70,7 @@ public class ProductRepositoryImpl implements ProductRepository {
         productEntity.setTotalSold(productMemento.getTotalSold());
         productEntity.setTierVariations(productMemento.getTierVariations());
         productEntity.setVideo(productMemento.getVideo());
+        productEntity.setVersion(product.getVersion());
         return productEntity;
     }
 
@@ -88,6 +89,7 @@ public class ProductRepositoryImpl implements ProductRepository {
                 jpaProduct.getStatus(),
                 jpaProduct.getTotalSold(),
                 jpaProduct.getDisplayPriority(),
+                jpaProduct.getVersion(),
                 jpaProduct.getTierVariations())
                 .restore();
     }
