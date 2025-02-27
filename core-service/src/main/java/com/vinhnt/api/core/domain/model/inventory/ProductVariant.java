@@ -5,12 +5,14 @@ import com.vinhnt.api.core.domain.model.AggregateRoot;
 import com.vinhnt.api.core.domain.model.ValidationNotificationHandler;
 import com.vinhnt.api.core.domain.model.Validator;
 import com.vinhnt.api.core.domain.model.inventory.exception.InvalidProductVariantException;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
 
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
-
+@Getter
 public class ProductVariant implements AggregateRoot<Long> {
     private Long id;
     private Long productId;
@@ -61,38 +63,6 @@ public class ProductVariant implements AggregateRoot<Long> {
         productVariantValidator.validate();
     }
 
-    Long getId() {
-        return id;
-    }
-
-    ProductPriceInfo getPriceInfo() {
-        return priceInfo;
-    }
-
-    Long getProductId() {
-        return productId;
-    }
-
-    String getSku() {
-        return sku;
-    }
-
-    long getSold() {
-        return sold;
-    }
-
-    ProductVariantStatus getStatus() {
-        return status;
-    }
-
-    int getStockQuantity() {
-        return stockQuantity;
-    }
-
-    int[] getTierIndex() {
-        return tierIndex;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
@@ -103,5 +73,27 @@ public class ProductVariant implements AggregateRoot<Long> {
     @Override
     public int hashCode() {
         return Objects.hash(id, productId, Arrays.hashCode(tierIndex));
+    }
+
+    public ProductVariantMemento createSnapshot() {
+        return new ProductVariantMemento(this.id, this.productId, this.priceInfo, this.status, this.stockQuantity, this.sku, this.sold, this.version, this.tierIndex);
+    }
+
+    @Getter
+    @AllArgsConstructor
+    public static class ProductVariantMemento {
+        private Long id;
+        private Long productId;
+        private ProductPriceInfo priceInfo;
+        private ProductVariantStatus status;
+        private int stockQuantity;
+        private String sku;
+        private long sold;
+        private long version;
+        private int[] tierIndex;
+
+        public ProductVariant restore() {
+            return new ProductVariant(this.id, this.productId, this.priceInfo, this.status, this.stockQuantity, this.sku, this.sold, this.version, this.tierIndex);
+        }
     }
 }

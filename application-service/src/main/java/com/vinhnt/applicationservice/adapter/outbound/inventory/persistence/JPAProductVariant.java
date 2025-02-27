@@ -1,6 +1,7 @@
 package com.vinhnt.applicationservice.adapter.outbound.inventory.persistence;
 
 import com.vinhnt.api.core.domain.model.inventory.ProductPriceInfo;
+import com.vinhnt.api.core.domain.model.inventory.ProductVariantStatus;
 import com.vinhnt.applicationservice.adapter.outbound.inventory.persistence.converter.ListIntegerConverter;
 import com.vinhnt.applicationservice.adapter.outbound.inventory.persistence.converter.PriceInfoConverter;
 import jakarta.persistence.*;
@@ -36,6 +37,9 @@ public class JPAProductVariant {
     @Column(name = "tier_index")
     @Convert(converter = ListIntegerConverter.class)
     private List<Integer> tierIndex;
+
+    @Column(name = "status")
+    private ProductVariantStatus status;
 
     @Column(name = "version")
     @Version

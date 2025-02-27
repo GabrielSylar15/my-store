@@ -3,6 +3,7 @@ package com.vinhnt.applicationservice.adapter.outbound.inventory;
 import com.vinhnt.api.core.application.port.outbound.inventory.ProductVariantRepository;
 import com.vinhnt.api.core.domain.model.inventory.ProductVariant;
 import com.vinhnt.api.core.domain.model.inventory.ProductVariantStatus;
+import com.vinhnt.applicationservice.adapter.outbound.inventory.persistence.JPAProductVariant;
 import com.vinhnt.applicationservice.adapter.outbound.inventory.persistence.JPAProductVariantRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
@@ -42,5 +43,18 @@ public class ProductVariantRepositoryImpl implements ProductVariantRepository {
     @Override
     public List<ProductVariant> saveAll(Iterable<ProductVariant> data) {
         return List.of();
+    }
+
+    public ProductVariant convertToDomainModel(JPAProductVariant jpaProductVariant) {
+        ProductVariant.ProductVariantMemento productVariantMemento = new ProductVariant.ProductVariantMemento(jpaProductVariant.getId(),
+                jpaProductVariant.getProductId(),
+                jpaProductVariant.getProductPriceInfo(),
+                jpaProductVariant.getStatus(),
+                jpaProductVariant.getStockQuantity(),
+                jpaProductVariant.getSku(),
+                jpaProductVariant.getSold(),
+                jpaProductVariant.getVersion(),
+                jpaProductVariant.getTierIndex().stream().mapToInt(i -> i).toArray());
+        return productVariantMemento.restore();
     }
 }
