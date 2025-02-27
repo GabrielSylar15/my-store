@@ -23,7 +23,7 @@ public class ProductVariantCreationService {
                                              String sku,
                                              long sold,
                                              int[] tierIndex) throws InvalidProductVariantException {
-        ProductVariant productVariant = new ProductVariant(null, productId, priceInfo, status, stockQuantity, sku, sold, tierIndex);
+        ProductVariant productVariant = new ProductVariant(null, productId, priceInfo, status, stockQuantity, sku, sold, 1L, tierIndex);
         ValidationNotificationHandlerImpl notificationHandler = new ValidationNotificationHandlerImpl();
         productVariant.validate(productRepository, notificationHandler, tierVariation);
         if (notificationHandler.messages().isEmpty()) {

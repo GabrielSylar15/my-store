@@ -1,7 +1,6 @@
 package com.vinhnt.api.core.domain.model.inventory;
 
 import com.vinhnt.api.core.domain.model.ValueObject;
-import lombok.Getter;
 
 import java.util.List;
 

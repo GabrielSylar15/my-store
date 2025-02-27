@@ -1,12 +1,14 @@
 package com.vinhnt.api.core.application.port.inbound.inventory;
 
-import com.vinhnt.api.core.domain.model.inventory.ProductPriceInfo;
+import com.fasterxml.jackson.databind.PropertyNamingStrategies;
+import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import com.vinhnt.api.core.domain.model.inventory.ProductVariantStatus;
 
 import java.util.Arrays;
 import java.util.Objects;
 
-public record ProductVariantDTO(ProductPriceInfo priceInfo,
+@JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
+public record ProductVariantDTO(ProductPriceInfoDTO priceInfo,
                                 ProductVariantStatus status,
                                 int stockQuantity,
                                 String sku,

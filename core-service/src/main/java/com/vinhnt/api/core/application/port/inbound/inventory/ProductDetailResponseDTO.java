@@ -31,4 +31,5 @@ public class ProductDetailResponseDTO {
     private long totalSold;
     private int displayPriority;
     private List<ProductVariant> productVariants;
+    private List<TierVariation> tierVariants;
 }

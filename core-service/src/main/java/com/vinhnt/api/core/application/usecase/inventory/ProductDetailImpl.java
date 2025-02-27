@@ -5,8 +5,11 @@ import com.vinhnt.api.core.application.port.inbound.inventory.ProductDetailRespo
 import com.vinhnt.api.core.application.port.outbound.inventory.ProductRepository;
 import com.vinhnt.api.core.application.port.outbound.inventory.ProductVariantRepository;
 import com.vinhnt.api.core.domain.model.inventory.Product;
+import com.vinhnt.api.core.domain.model.inventory.ProductVariant;
+import com.vinhnt.api.core.domain.model.inventory.ProductVariantStatus;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 public class ProductDetailImpl implements ProductDetail {
@@ -23,6 +26,7 @@ public class ProductDetailImpl implements ProductDetail {
     public ProductDetailResponseDTO getProductDetailById(Long productId) {
         Product product = productRepository.findById(productId);
         if (Objects.isNull(product))    return null;
+        List<ProductVariant> productVariants = productVariantRepository.findByProductIdAndStatus(productId, ProductVariantStatus.AVAILABLE);
         return ProductDetailResponseDTO.builder()
                 .id(product.getId())
                 .categoryId(product.getCategoryId())
@@ -37,7 +41,7 @@ public class ProductDetailImpl implements ProductDetail {
                 .totalSold(product.getTotalSold())
                 .displayPriority(product.getDisplayPriority())
                 .tierVariations(product.getTierVariations())
-                .tierVariations(new ArrayList<>())
+                .productVariants(productVariants)
                 .build();
     }
 }

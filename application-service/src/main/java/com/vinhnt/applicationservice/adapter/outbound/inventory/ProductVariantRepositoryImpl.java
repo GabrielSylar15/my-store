@@ -2,7 +2,7 @@ package com.vinhnt.applicationservice.adapter.outbound.inventory;
 
 import com.vinhnt.api.core.application.port.outbound.inventory.ProductVariantRepository;
 import com.vinhnt.api.core.domain.model.inventory.ProductVariant;
-import com.vinhnt.api.core.domain.model.inventory.ProductVariantId;
+import com.vinhnt.api.core.domain.model.inventory.ProductVariantStatus;
 import com.vinhnt.applicationservice.adapter.outbound.inventory.persistence.JPAProductVariantRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
@@ -13,6 +13,11 @@ import java.util.List;
 @RequiredArgsConstructor
 public class ProductVariantRepositoryImpl implements ProductVariantRepository {
     private final JPAProductVariantRepository jpaProductVariantRepository;
+
+    @Override
+    public List<ProductVariant> findByProductIdAndStatus(Long productId, ProductVariantStatus status) {
+        return List.of();
+    }
 
     @Override
     public void delete(ProductVariant data) {
@@ -30,7 +35,7 @@ public class ProductVariantRepositoryImpl implements ProductVariantRepository {
     }
 
     @Override
-    public ProductVariant findById(ProductVariantId productVariantId) {
+    public ProductVariant findById(Long productVariantId) {
         return null;
     }
 

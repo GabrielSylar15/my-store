@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/api/v1/product-variants")
 public class ProductVariantController {
-    public ProductVariantApplicationService productVariantApplicationService;
+    public final ProductVariantApplicationService productVariantApplicationService;
 
     @PostMapping("")
     public ResponseEntity<?> createProductVariant(@RequestBody ProductVariantCreationDTO productVariantCreationDTO) {

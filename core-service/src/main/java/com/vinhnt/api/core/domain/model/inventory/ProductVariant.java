@@ -11,23 +11,25 @@ import java.util.List;
 import java.util.Objects;
 
 
-public class ProductVariant implements AggregateRoot<ProductVariantId> {
-    private ProductVariantId id;
+public class ProductVariant implements AggregateRoot<Long> {
+    private Long id;
     private Long productId;
     private ProductPriceInfo priceInfo;
     private ProductVariantStatus status;
     private int stockQuantity;
     private String sku;
     private long sold;
+    private long version;
     private int[] tierIndex;
 
-    ProductVariant(ProductVariantId id,
+    ProductVariant(Long id,
                    Long productId,
                    ProductPriceInfo priceInfo,
                    ProductVariantStatus status,
                    int stockQuantity,
                    String sku,
                    long sold,
+                   long version,
                    int[] tierIndex) throws InvalidProductVariantException {
         this.id = id;
         if (sold < 0) {
@@ -48,6 +50,7 @@ public class ProductVariant implements AggregateRoot<ProductVariantId> {
         this.sold = sold;
         this.status = status;
         this.stockQuantity = stockQuantity;
+        this.version = version;
         this.tierIndex = tierIndex;
     }
 
@@ -58,7 +61,7 @@ public class ProductVariant implements AggregateRoot<ProductVariantId> {
         productVariantValidator.validate();
     }
 
-    ProductVariantId getId() {
+    Long getId() {
         return id;
     }
 

@@ -35,7 +35,7 @@ public class ProductVariantCreationImpl implements ProductVariantCreation {
         for (ProductVariantDTO variant : productVariantCreationDTO.variants()) {
             productVariants.add(productVariantCreationService.initProductVariant(productVariantCreationDTO.tierVariation(),
                     productVariantCreationDTO.productId(),
-                    variant.priceInfo(),
+                    variant.priceInfo().toProductPriceInfo(),
                     variant.status(),
                     variant.stockQuantity(),
                     variant.sku(),

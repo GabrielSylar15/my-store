@@ -14,7 +14,8 @@ public class ProductVariantApplicationService {
     public ProductDetailResponseDTO createProductVariant(ProductVariantCreationDTO productVariantCreationDTO) {
         ProductVariantCreationOutputDTO productVariantCreationOutputDTO = productVariantCreation.createProductVariant(productVariantCreationDTO);
         ProductDetailResponseDTO productDetailResponseDTO = productDetail.getProductDetailById(productVariantCreationDTO.productId());
-        productDetailResponseDTO.setProductVariants();
+        productDetailResponseDTO.setProductVariants(productVariantCreationOutputDTO.variants());
+        productDetailResponseDTO.setTierVariants(productVariantCreationOutputDTO.tierVariations());
         return productDetailResponseDTO;
     }
 }
