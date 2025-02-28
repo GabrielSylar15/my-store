@@ -9,4 +9,8 @@ public record VideoDTO(String id, String thumbnailUrl, int duration) {
     public Video toVideo() {
         return new Video(id, thumbnailUrl, duration);
     }
+
+    public static VideoDTO fromVideo(Video video) {
+        return new VideoDTO(video.id(), video.thumbnailUrl(), video.duration());
+    }
 }

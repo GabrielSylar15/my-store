@@ -27,6 +27,7 @@ public class ProductCreationImpl implements ProductCreation {
                 productCreationDTO.stockQuantity(),
                 productCreationDTO.status(),
                 productCreationDTO.displayPriority(),
+                productCreationDTO.priceInfo().toProductPriceInfo(),
                 productCreationDTO.video().toVideo());
         return productRepository.save(product);
     }

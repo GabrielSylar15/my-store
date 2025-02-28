@@ -16,7 +16,6 @@ import java.util.Objects;
 
 @Getter
 public class Product implements AggregateRoot<Long> {
-    private List<TierVariation> tierVariations;
     private Long id;
     private Long categoryId;
     private String description;
@@ -30,6 +29,8 @@ public class Product implements AggregateRoot<Long> {
     private long totalSold;
     private int displayPriority;
     private long version;
+    private ProductPriceInfo priceInfo;
+    private List<TierVariation> tierVariations;
 
     Product(Long id,
             Long categoryId,
@@ -44,6 +45,7 @@ public class Product implements AggregateRoot<Long> {
             long totalSold,
             int displayPriority,
             long version,
+            ProductPriceInfo priceInfo,
             List<TierVariation> tierVariations) throws InvalidProductException {
         this.id = id;
         this.categoryId = categoryId;
@@ -70,6 +72,7 @@ public class Product implements AggregateRoot<Long> {
         this.displayPriority = displayPriority;
         this.version = version;
         this.video = video;
+        this.priceInfo = priceInfo;
         this.tierVariations = tierVariations;
     }
 
@@ -125,6 +128,7 @@ public class Product implements AggregateRoot<Long> {
                 this.totalSold,
                 this.displayPriority,
                 this.version,
+                this.priceInfo,
                 tierVariations);
     }
 
@@ -150,6 +154,7 @@ public class Product implements AggregateRoot<Long> {
                 this.totalSold,
                 this.displayPriority,
                 this.version,
+                this.priceInfo,
                 this.tierVariations);
     }
 
@@ -169,6 +174,7 @@ public class Product implements AggregateRoot<Long> {
         private long totalSold;
         private int displayPriority;
         private long version;
+        private ProductPriceInfo priceInfo;
         private List<TierVariation> tierVariations;
 
         public Product restore() throws InvalidProductVariantException {
@@ -185,6 +191,7 @@ public class Product implements AggregateRoot<Long> {
                     this.totalSold,
                     this.displayPriority,
                     this.version,
+                    this.priceInfo,
                     this.tierVariations);
         }
     }

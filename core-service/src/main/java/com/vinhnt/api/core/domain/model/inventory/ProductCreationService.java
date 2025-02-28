@@ -25,8 +25,9 @@ public class ProductCreationService {
                                int stockQuantity,
                                ProductStatus status,
                                int displayPriority,
+                               ProductPriceInfo priceInfo,
                                Video video) throws InvalidProductException {
-        Product product = new Product(null, categoryId, description, images, name, preOrder, productDimension, stockQuantity, video, status, 0, displayPriority, 1, new ArrayList<>());
+        Product product = new Product(null, categoryId, description, images, name, preOrder, productDimension, stockQuantity, video, status, 0, displayPriority, 1, priceInfo, new ArrayList<>());
         ValidationNotificationHandlerImpl notificationHandler = new ValidationNotificationHandlerImpl();
         product.validate(productRepository, categoryRepository, notificationHandler);
         if (notificationHandler.messages().isEmpty()) {

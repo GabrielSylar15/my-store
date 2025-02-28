@@ -6,6 +6,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -30,14 +31,15 @@ public class ProductApplicationService {
                 .id(product.getId())
                 .categoryId(product.getCategoryId())
                 .description(product.getDescription())
-                .images(product.getImages())
+                .images(product.getImages().stream().map(ImageDTO::fromImage).collect(Collectors.toList()))
                 .name(product.getName())
-                .preOrder(product.getPreOrder())
+                .preOrder(PreOrderDTO.fromPreOrder(product.getPreOrder()))
                 .productDimension(product.getProductDimension())
                 .stockQuantity(product.getStockQuantity())
-                .video(product.getVideo())
+                .video(VideoDTO.fromVideo(product.getVideo()))
                 .status(product.getStatus())
                 .totalSold(product.getTotalSold())
+                .priceInfo(ProductPriceInfoDTO.fromProductPriceInfo(product.getPriceInfo()))
                 .displayPriority(product.getDisplayPriority())
                 .tierVariations(product.getTierVariations())
                 .build();

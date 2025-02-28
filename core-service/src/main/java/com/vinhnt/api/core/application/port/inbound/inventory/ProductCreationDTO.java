@@ -19,5 +19,6 @@ public record ProductCreationDTO(Long categoryId,
                                  int stockQuantity,
                                  ProductStatus status,
                                  int displayPriority,
+                                 ProductPriceInfoDTO priceInfo,
                                  VideoDTO video) {
 }

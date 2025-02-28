@@ -9,4 +9,8 @@ public record PreOrderDTO(boolean isPreOrder, int daysToShip) {
     public PreOrder toPreOrder() {
         return new PreOrder(isPreOrder, daysToShip);
     }
+
+    public static PreOrderDTO fromPreOrder(PreOrder preOrder) {
+        return new PreOrderDTO(preOrder.isPreOrder(), preOrder.daysToShip());
+    }
 }

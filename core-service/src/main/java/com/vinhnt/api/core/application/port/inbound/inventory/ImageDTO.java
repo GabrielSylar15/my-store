@@ -9,4 +9,8 @@ public record ImageDTO(String url, String imageRation) {
     public Image toImage(String url, String imageRation) {
         return new Image(url, imageRation);
     }
+
+    public static ImageDTO fromImage(Image image) {
+        return new ImageDTO(image.url(), image.imageRation());
+    }
 }

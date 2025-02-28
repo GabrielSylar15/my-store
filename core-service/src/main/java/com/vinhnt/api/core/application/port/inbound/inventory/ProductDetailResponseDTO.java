@@ -21,15 +21,16 @@ public class ProductDetailResponseDTO {
     private long id;
     private long categoryId;
     private String description;
-    private List<Image> images;
+    private List<ImageDTO> images;
     private String name;
-    private PreOrder preOrder;
+    private PreOrderDTO preOrder;
     private ProductDimension productDimension;
     private int stockQuantity;
-    private Video video;
+    private VideoDTO video;
     private ProductStatus status;
     private long totalSold;
     private int displayPriority;
-    private List<ProductVariant> productVariants;
+    private ProductPriceInfoDTO priceInfo;
+    private List<ProductVariantDTO> productVariants;
     private List<TierVariation> tierVariants;
 }

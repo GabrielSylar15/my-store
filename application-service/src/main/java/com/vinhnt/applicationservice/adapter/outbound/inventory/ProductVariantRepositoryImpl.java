@@ -8,7 +8,10 @@ import com.vinhnt.applicationservice.adapter.outbound.inventory.persistence.JPAP
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Repository
 @RequiredArgsConstructor
@@ -17,7 +20,10 @@ public class ProductVariantRepositoryImpl implements ProductVariantRepository {
 
     @Override
     public List<ProductVariant> findByProductIdAndStatus(Long productId, ProductVariantStatus status) {
-        return List.of();
+        return jpaProductVariantRepository.findByProductId(productId)
+                .stream()
+                .map(this::convertToDomainModel)
+                .toList();
     }
 
     @Override
@@ -42,10 +48,31 @@ public class ProductVariantRepositoryImpl implements ProductVariantRepository {
 
     @Override
     public List<ProductVariant> saveAll(Iterable<ProductVariant> data) {
-        return List.of();
+        List<JPAProductVariant> jpaProductVariants = new ArrayList<>();
+        for (ProductVariant jpaProductVariant : data) {
+            jpaProductVariants.add(convertToJPAEntity(jpaProductVariant));
+        }
+        jpaProductVariants = jpaProductVariantRepository.saveAll(jpaProductVariants);
+        return jpaProductVariants.stream().map(this::convertToDomainModel).toList();
     }
 
-    public ProductVariant convertToDomainModel(JPAProductVariant jpaProductVariant) {
+    private JPAProductVariant convertToJPAEntity(ProductVariant productVariant) {
+        JPAProductVariant jpaProductVariant = new JPAProductVariant();
+        jpaProductVariant.setId(productVariant.getId());
+        jpaProductVariant.setProductId(productVariant.getProductId());
+        jpaProductVariant.setProductPriceInfo(productVariant.getPriceInfo());
+        jpaProductVariant.setStockQuantity(productVariant.getStockQuantity());
+        jpaProductVariant.setSold(productVariant.getSold());
+        jpaProductVariant.setSku(productVariant.getSku());
+        jpaProductVariant.setStatus(productVariant.getStatus());
+        jpaProductVariant.setTierIndex(Arrays.stream(productVariant.getTierIndex())
+                .boxed()
+                .collect(Collectors.toList()));
+        jpaProductVariant.setVersion(productVariant.getVersion());
+        return jpaProductVariant;
+    }
+
+    private ProductVariant convertToDomainModel(JPAProductVariant jpaProductVariant) {
         ProductVariant.ProductVariantMemento productVariantMemento = new ProductVariant.ProductVariantMemento(jpaProductVariant.getId(),
                 jpaProductVariant.getProductId(),
                 jpaProductVariant.getProductPriceInfo(),

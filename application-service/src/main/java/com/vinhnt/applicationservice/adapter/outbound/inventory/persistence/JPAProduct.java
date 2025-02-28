@@ -1,10 +1,8 @@
 package com.vinhnt.applicationservice.adapter.outbound.inventory.persistence;
 
-import com.vinhnt.api.core.domain.model.inventory.Image;
-import com.vinhnt.api.core.domain.model.inventory.ProductStatus;
-import com.vinhnt.api.core.domain.model.inventory.TierVariation;
-import com.vinhnt.api.core.domain.model.inventory.Video;
+import com.vinhnt.api.core.domain.model.inventory.*;
 import com.vinhnt.applicationservice.adapter.outbound.inventory.persistence.converter.ListImageConverter;
+import com.vinhnt.applicationservice.adapter.outbound.inventory.persistence.converter.PriceInfoConverter;
 import com.vinhnt.applicationservice.adapter.outbound.inventory.persistence.converter.TierVariationConverter;
 import com.vinhnt.applicationservice.adapter.outbound.inventory.persistence.converter.VideoConverter;
 import jakarta.persistence.*;
@@ -56,6 +54,10 @@ public class JPAProduct {
     @Column(name = "images")
     @Convert(converter = ListImageConverter.class)
     private List<Image> images;
+
+    @Column(name = "price_info")
+    @Convert(converter = PriceInfoConverter.class)
+    private ProductPriceInfo priceInfo;
 
     @Column(name = "weight")
     private Float weight;
