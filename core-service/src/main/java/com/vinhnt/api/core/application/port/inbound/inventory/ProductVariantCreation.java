@@ -5,4 +5,6 @@ import com.vinhnt.api.core.domain.model.inventory.exception.InvalidProductVarian
 
 public interface ProductVariantCreation {
     ProductVariantCreationOutputDTO createProductVariant(ProductVariantCreationDTO productVariantCreationDTO) throws InvalidProductVariantException, InvalidProductException;
+
+    ProductVariantCreationDTO addProductVariant(ProductVariantAddItemDTO addProductVariantDTO);
 }

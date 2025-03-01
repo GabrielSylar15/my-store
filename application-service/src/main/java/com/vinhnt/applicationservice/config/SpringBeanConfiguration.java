@@ -72,4 +72,9 @@ public class SpringBeanConfiguration {
     public ProductVariantCreation productVariantCreation(ProductVariantRepository productVariantRepository, ProductRepository productRepository, ProductVariantCreationService productVariantCreationService) {
         return new ProductVariantCreationImpl(productVariantRepository, productRepository, productVariantCreationService);
     }
+
+    @Bean
+    public ProductVariantUpdate productVariantUpdate(ProductVariantRepository productVariantRepository) {
+        return new ProductVariantUpdateImpl(productVariantRepository);
+    }
 }

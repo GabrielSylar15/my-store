@@ -19,6 +19,17 @@ public class ProductVariantRepositoryImpl implements ProductVariantRepository {
     private final JPAProductVariantRepository jpaProductVariantRepository;
 
     @Override
+    public List<ProductVariant> findByProductIdAndIdIn(Long productId, List<Long> ids) {
+        return List.of();
+    }
+
+    @Override
+    public void deleteAll(List<ProductVariant> productVariants) {
+        List<JPAProductVariant> jpaProductVariants = productVariants.stream().map(this::convertToJPAEntity).toList();
+        jpaProductVariantRepository.deleteAll(jpaProductVariants);
+    }
+
+    @Override
     public List<ProductVariant> findByProductIdAndStatus(Long productId, ProductVariantStatus status) {
         return jpaProductVariantRepository.findByProductId(productId)
                 .stream()

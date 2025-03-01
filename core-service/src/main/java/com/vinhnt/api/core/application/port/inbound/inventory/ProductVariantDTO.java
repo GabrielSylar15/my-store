@@ -9,14 +9,16 @@ import java.util.Arrays;
 import java.util.Objects;
 
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
-public record ProductVariantDTO(ProductPriceInfoDTO priceInfo,
+public record ProductVariantDTO(Long id,
+                                ProductPriceInfoDTO priceInfo,
                                 ProductVariantStatus status,
                                 int stockQuantity,
                                 String sku,
                                 long sold,
                                 int[] tierIndex) {
     public static ProductVariantDTO fromProductVariant(ProductVariant productVariant) {
-        return new ProductVariantDTO(ProductPriceInfoDTO.fromProductPriceInfo(productVariant.getPriceInfo()),
+        return new ProductVariantDTO(productVariant.getId(),
+                ProductPriceInfoDTO.fromProductPriceInfo(productVariant.getPriceInfo()),
                 productVariant.getStatus(),
                 productVariant.getStockQuantity(),
                 productVariant.getSku(),

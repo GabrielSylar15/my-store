@@ -56,6 +56,13 @@ public class ProductVariant implements AggregateRoot<Long> {
         this.tierIndex = tierIndex;
     }
 
+    public void updateProductVariantInfo(ProductPriceInfo productPriceInfo, int stockQuantity, String sku, int[] tierIndex) {
+        this.priceInfo = productPriceInfo;
+        this.stockQuantity = stockQuantity;
+        this.sku = sku;
+        this.tierIndex = tierIndex;
+    }
+
     public void validate(ProductRepository productRepository,
                          ValidationNotificationHandler validationNotificationHandler,
                          List<TierVariation> tierVariations) {

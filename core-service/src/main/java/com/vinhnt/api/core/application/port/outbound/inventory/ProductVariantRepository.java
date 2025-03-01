@@ -8,4 +8,8 @@ import java.util.List;
 
 public interface ProductVariantRepository extends BaseRepository<ProductVariant, Long> {
     List<ProductVariant> findByProductIdAndStatus(Long productId, ProductVariantStatus status);
+
+    void deleteAll(List<ProductVariant> productVariants);
+
+    List<ProductVariant> findByProductIdAndIdIn(Long productId, List<Long> ids);
 }
